@@ -1,0 +1,8 @@
+<!-- FAVICON PLACEHOLDER — reemplázalo por el ícono definitivo de BRACAR.
+     Es una "B" sobre fondo azul marino con acento ámbar (colores de marca). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#16345F"/>
+  <path d="M12 52 C 24 48, 40 42, 54 16" fill="none" stroke="#F5A623" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 6"/>
+  <text x="32" y="44" font-family="Arial, sans-serif" font-size="34" font-weight="900"
+        text-anchor="middle" fill="#FFFFFF">B</text>
+</svg>
