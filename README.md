@@ -24,7 +24,7 @@ bracar/
 ├── assets/
 │   └── img/
 │       ├── favicon.svg   # Favicon placeholder (reemplazar)
-│       ├── flota/        # Fotos de las unidades (placeholders)
+│       ├── flota/        # Ilustraciones SVG genéricas de las unidades
 │       └── clientes/     # Logos de clientes (placeholders)
 └── README.md
 ```
@@ -77,11 +77,18 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   dentro del `<svg class="bus">` (bloque comentado "SVG DEL BUS (EDITABLE)").
 
 ### 2. Fotos de la flota
-- Coloca las imágenes en `assets/img/flota/` con estos nombres (o cambia el
-  `src` en `index.html`): `auto.jpg`, `minivan.jpg`, `van.jpg`, `coaster.jpg`,
-  `minibus.jpg`, `bus.jpg`.
-- Tamaño sugerido: **480×320 px** (relación 3:2). Mientras no existan, se muestra
-  un placeholder con textura ("Foto de unidad").
+- Por ahora cada unidad usa una **ilustración genérica en SVG** (colores de la
+  marca) ubicada en `assets/img/flota/`: `auto.svg`, `minivan.svg`, `van.svg`,
+  `coaster.svg`, `minibus.svg`, `bus.svg`.
+- Para usar **fotos reales**, reemplaza el `src` de cada `<img>` en la sección
+  Flota de `index.html` (por ejemplo `assets/img/flota/bus.jpg`) y sube la foto.
+- Tamaño sugerido: **480×320 px** (relación 3:2).
+
+### 2b. Ubicación (Google Maps)
+- La sección "Ubicación" incrusta Google Maps en modo *embed* (sin API key).
+- Para cambiar el punto, edita el parámetro `q=` del `<iframe>` y del enlace
+  **"Cómo llegar"** en `index.html` (sección `#ubicacion`) con la dirección o
+  las coordenadas correctas.
 
 ### 3. Logos de clientes
 - El carrusel usa texto por defecto. Para usar logos, reemplaza cada

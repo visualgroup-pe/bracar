@@ -275,25 +275,36 @@ section[id], header[id] { scroll-margin-top: 84px; }
   box-shadow: 0 6px 24px rgba(12,31,58,0.10);
 }
 
-/* --- Marca / logo placeholder --- */
-.brand { display: flex; flex-direction: column; line-height: 1; }
+/* --- Marca / logo (reconstrucción fiel al original) -----------------------
+   Estructura del logo real: "TRANSPORTES GLOBAL" en gris arriba y "BRACAR"
+   en grande debajo (azul marino), con un trazo de carretera (motivo "ruta").
+   Los colores se adaptan al fondo (claros sobre el hero oscuro; de marca
+   sobre la navbar clara) para mantener la legibilidad. */
+.brand { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px; }
+/* "TRANSPORTES GLOBAL" (arriba, gris) */
+.brand__tag {
+  font-family: var(--ff-head);
+  font-weight: 700;
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(234, 240, 248, 0.72);
+  transition: color var(--t-med);
+}
+/* "BRACAR" (grande) — Archivo 900 para un trazo geométrico ancho, no condensado */
 .brand__mark {
-  font-family: var(--ff-display);
-  font-size: 1.7rem;
-  letter-spacing: 0.04em;
+  font-family: var(--ff-head);
+  font-weight: 900;
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
+  letter-spacing: 0.005em;
   color: var(--on-dark);            /* claro sobre el hero oscuro */
   transition: color var(--t-med);
 }
-.brand__tag {
-  font-family: var(--ff-head);
-  font-weight: 600;
-  font-size: 0.58rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-top: 3px;
-}
-/* Cuando la navbar es sólida, el logo pasa a azul marino */
+/* Trazo de carretera bajo el wordmark */
+.brand__road { width: 100%; height: 8px; margin-top: 1px; overflow: visible; }
+.brand__road path { stroke: var(--amber); }
+/* Navbar sólida: colores reales de la marca */
+.nav.is-scrolled .brand__tag { color: #5b6b80; }
 .nav.is-scrolled .brand__mark { color: var(--navy); }
 
 /* --- Menú --- */
@@ -347,7 +358,9 @@ section[id], header[id] { scroll-margin-top: 84px; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(6rem, 12vh, 9rem) var(--gutter) 0;
+  /* Reserva inferior para la franja de carretera + bus, de modo que NUNCA
+     se solapen con el titular, subtítulo ni los botones. */
+  padding: clamp(5rem, 11vh, 8rem) var(--gutter) clamp(155px, 19vh, 200px);
   background:
     radial-gradient(120% 90% at 85% -10%, var(--navy-700) 0%, transparent 55%),
     linear-gradient(160deg, var(--navy-900) 0%, var(--navy) 60%, var(--navy-800) 100%);
@@ -875,6 +888,7 @@ section[id], header[id] { scroll-margin-top: 84px; }
   overflow: hidden;
 }
 .clients__head { max-width: var(--maxw); margin: 0 auto var(--sp-4); }
+.clients__note { font-size: var(--fs-sm); color: var(--muted); font-style: italic; margin-top: var(--sp-1); }
 
 .marquee {
   position: relative;
@@ -1034,6 +1048,43 @@ section[id], header[id] { scroll-margin-top: 84px; }
 
 
 /* ============================================================================
+   13b. UBICACIÓN (Google Maps)
+   Banda clara (da ritmo tras el contacto oscuro), retícula asimétrica.
+   ============================================================================ */
+.mapsec {
+  background: var(--cream);
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+.mapsec__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 0.85fr 1.3fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.mapsec__addr {
+  font-size: var(--fs-lead);
+  color: var(--ink);
+  margin: var(--sp-3) 0 var(--sp-2);
+  display: flex; gap: 0.5em; align-items: flex-start;
+}
+.mapsec__hours { color: var(--muted); margin-bottom: var(--sp-3); display: flex; gap: 0.5em; align-items: center; }
+/* Marco del mapa con la estética de la marca */
+.mapsec__frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 5px solid var(--paper);
+}
+.mapsec__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+
+/* ============================================================================
    14. FOOTER + WHATSAPP FLOTANTE
    ============================================================================ */
 .footer {
@@ -1051,7 +1102,10 @@ section[id], header[id] { scroll-margin-top: 84px; }
   padding-bottom: var(--sp-5);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+.footer__brand { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
 .brand__mark--footer { color: var(--on-dark); font-size: 2rem; }
+.footer__brand .brand__tag { color: var(--on-dark-muted); }
+.footer__brand .brand__road { max-width: 190px; }
 .footer__desc { font-size: var(--fs-sm); margin-top: var(--sp-2); max-width: 40ch; }
 .footer__col h4 {
   font-family: var(--ff-head); font-weight: 700;
@@ -1149,6 +1203,8 @@ section[id], header[id] { scroll-margin-top: 84px; }
   .fleet__grid { grid-template-columns: repeat(2, 1fr); }
   .certs__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
+  .mapsec__inner { grid-template-columns: 1fr; }
+  .mapsec__frame { aspect-ratio: 4 / 3; }
 }
 
 /* --- Móvil: menú hamburguesa y ajustes --- */
@@ -1175,7 +1231,7 @@ section[id], header[id] { scroll-margin-top: 84px; }
   .nav__cta { margin-top: var(--sp-2); }
 
   /* Hero: bus más pequeño, stat reubicado para no tapar el titular */
-  .hero { padding-top: 7rem; }
+  .hero { padding-top: 6.5rem; padding-bottom: 130px; }
   .hero__title { font-size: clamp(2.1rem, 8.5vw, 3rem); }
   .hero__stat { position: static; transform: none; align-items: flex-start; text-align: left; margin-top: var(--sp-4); flex-direction: row; align-items: baseline; gap: 0.6em; }
   .hero__stat-num { -webkit-text-stroke-width: 1.5px; }

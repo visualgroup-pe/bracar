@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-label="Ilustración genérica de unidad">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eff3f8"/><stop offset="1" stop-color="#dbe4ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" fill="url(#bg)"/>
+  <rect x="0" y="252" width="480" height="68" fill="#c9d5e4"/>
+  <ellipse cx="240" cy="264" rx="220" ry="16" fill="#0C1F3A" opacity=".14"/><rect x="156" y="68" width="126" height="10" rx="4" fill="#0C1F3A"/><rect x="30" y="76" width="420" height="166" rx="18" fill="#16345F"/><rect x="378" y="86" width="58" height="16" rx="4" fill="#0C1F3A"/><rect x="44" y="98" width="392" height="48" rx="8" fill="#cfe6ff"/><rect x="98" y="98" width="4" height="48" fill="#16345F"/><rect x="154" y="98" width="4" height="48" fill="#16345F"/><rect x="210" y="98" width="4" height="48" fill="#16345F"/><rect x="266" y="98" width="4" height="48" fill="#16345F"/><rect x="322" y="98" width="4" height="48" fill="#16345F"/><rect x="378" y="98" width="4" height="48" fill="#16345F"/><rect x="408" y="98" width="26" height="124" rx="4" fill="#0C1F3A" opacity=".9"/>
+              <rect x="408" y="98" width="26" height="62" rx="4" fill="#cfe6ff" opacity=".9"/><rect x="30" y="212" width="420" height="14" rx="7" fill="#F5A623"/><rect x="88.80000000000001" y="229" width="302.4" height="8" rx="3" fill="#0C1F3A" opacity=".35"/><rect x="434" y="214" width="12" height="12" rx="3" fill="#F5A623"/><g>
+    <circle cx="112" cy="242" r="30" fill="#12181f"/>
+    <circle cx="112" cy="242" r="21.599999999999998" fill="#1c2530"/>
+    <circle cx="112" cy="242" r="13.8" fill="#c9d3df"/>
+    <circle cx="112" cy="242" r="5.5200000000000005" fill="#8894a6"/>
+  </g><g>
+    <circle cx="372" cy="242" r="30" fill="#12181f"/>
+    <circle cx="372" cy="242" r="21.599999999999998" fill="#1c2530"/>
+    <circle cx="372" cy="242" r="13.8" fill="#c9d3df"/>
+    <circle cx="372" cy="242" r="5.5200000000000005" fill="#8894a6"/>
+  </g>
+</svg>

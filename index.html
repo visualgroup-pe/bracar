@@ -97,10 +97,15 @@
   <header class="nav" id="inicio">
     <div class="nav__inner">
       <a class="brand" href="#inicio" aria-label="Transportes Global BRACAR — Inicio">
-        <!-- ▼▼▼ PLACEHOLDER LOGO — reemplazar por <img src="assets/img/logo.svg" alt="BRACAR"> ▼▼▼ -->
-        <span class="brand__mark">BRACAR</span>
+        <!-- ▼▼▼ LOGO — reconstrucción fiel al original: "TRANSPORTES GLOBAL"
+             (gris, arriba) + "BRACAR" (azul marino, grande) + trazo de carretera.
+             Reemplazar por el archivo oficial: <img src="assets/img/logo.svg" alt="Transportes Global BRACAR"> ▼▼▼ -->
         <span class="brand__tag">Transportes Global</span>
-        <!-- ▲▲▲ FIN PLACEHOLDER LOGO ▲▲▲ -->
+        <span class="brand__mark">BRACAR</span>
+        <svg class="brand__road" viewBox="0 0 160 12" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path d="M2 9 C 46 9, 74 4, 120 3 L 158 2" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 6"/>
+        </svg>
+        <!-- ▲▲▲ FIN LOGO ▲▲▲ -->
       </a>
 
       <nav class="nav__menu" id="navMenu" aria-label="Navegación principal">
@@ -418,42 +423,42 @@
         <li class="fleet-card reveal">
           <div class="fleet-card__cap"><span>2–3</span><small>pax</small></div>
           <div class="fleet-card__photo">
-            <img src="assets/img/flota/auto.jpg" alt="Auto ejecutivo BRACAR" loading="lazy" width="480" height="320" onerror="this.style.display='none'" />
+            <img src="assets/img/flota/auto.svg" alt="Auto ejecutivo BRACAR" loading="lazy" width="480" height="320" />
           </div>
           <h3 class="fleet-card__name">Auto</h3>
         </li>
         <li class="fleet-card reveal">
           <div class="fleet-card__cap"><span>8–11</span><small>pax</small></div>
           <div class="fleet-card__photo">
-            <img src="assets/img/flota/minivan.jpg" alt="Mini Van BRACAR" loading="lazy" width="480" height="320" onerror="this.style.display='none'" />
+            <img src="assets/img/flota/minivan.svg" alt="Mini Van BRACAR" loading="lazy" width="480" height="320" />
           </div>
           <h3 class="fleet-card__name">Mini Van</h3>
         </li>
         <li class="fleet-card reveal">
           <div class="fleet-card__cap"><span>15–17</span><small>pax</small></div>
           <div class="fleet-card__photo">
-            <img src="assets/img/flota/van.jpg" alt="Van BRACAR" loading="lazy" width="480" height="320" onerror="this.style.display='none'" />
+            <img src="assets/img/flota/van.svg" alt="Van BRACAR" loading="lazy" width="480" height="320" />
           </div>
           <h3 class="fleet-card__name">Van</h3>
         </li>
         <li class="fleet-card reveal">
           <div class="fleet-card__cap"><span>22–28</span><small>pax</small></div>
           <div class="fleet-card__photo">
-            <img src="assets/img/flota/coaster.jpg" alt="Coaster BRACAR" loading="lazy" width="480" height="320" onerror="this.style.display='none'" />
+            <img src="assets/img/flota/coaster.svg" alt="Coaster BRACAR" loading="lazy" width="480" height="320" />
           </div>
           <h3 class="fleet-card__name">Coaster</h3>
         </li>
         <li class="fleet-card reveal">
           <div class="fleet-card__cap"><span>30–35</span><small>pax</small></div>
           <div class="fleet-card__photo">
-            <img src="assets/img/flota/minibus.jpg" alt="Minibús BRACAR" loading="lazy" width="480" height="320" onerror="this.style.display='none'" />
+            <img src="assets/img/flota/minibus.svg" alt="Minibús BRACAR" loading="lazy" width="480" height="320" />
           </div>
           <h3 class="fleet-card__name">Minibús</h3>
         </li>
         <li class="fleet-card reveal">
           <div class="fleet-card__cap"><span>40–50</span><small>pax</small></div>
           <div class="fleet-card__photo">
-            <img src="assets/img/flota/bus.jpg" alt="Bus BRACAR" loading="lazy" width="480" height="320" onerror="this.style.display='none'" />
+            <img src="assets/img/flota/bus.svg" alt="Bus BRACAR" loading="lazy" width="480" height="320" />
           </div>
           <h3 class="fleet-card__name">Bus</h3>
         </li>
@@ -512,6 +517,9 @@
       <div class="clients__head reveal">
         <p class="section__eyebrow">Clientes</p>
         <h2 class="section__title">Empresas que ya <span class="text-accent">confían</span></h2>
+        <!-- NOTA: nombres referenciales. Logos de clientes PENDIENTES de actualizar
+             (reemplazar cada <li class="logo"> por <img> en AMBAS listas del marquee). -->
+        <p class="clients__note">Nombres referenciales · logotipos en actualización.</p>
       </div>
 
       <!-- El marquee duplica el contenido (aria-hidden en el clon) para loop infinito -->
@@ -696,6 +704,35 @@
         </form>
       </div>
     </section>
+
+    <!-- ============================================================
+         13. UBICACIÓN (Google Maps)
+         Mapa incrustado en modo "embed" (sin API key). Para mover el punto,
+         edita el parámetro q= (dirección) del <iframe> y del enlace "Cómo llegar".
+         ============================================================ -->
+    <section class="mapsec" id="ubicacion" aria-label="Ubicación">
+      <div class="mapsec__inner">
+        <div class="mapsec__info reveal">
+          <p class="section__eyebrow">Ubicación</p>
+          <h2 class="section__title">Dónde <span class="text-accent">estamos</span></h2>
+          <p class="mapsec__addr">
+            <span aria-hidden="true">📍</span>
+            Sector 3, Grupo 22, Mz. H, Lote 15,<br>Villa El Salvador, Lima — Perú
+          </p>
+          <p class="mapsec__hours"><span aria-hidden="true">🕑</span> Atención 24 horas</p>
+          <a class="btn btn--amber" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/dir/?api=1&destination=Sector%203%20Grupo%2022%20Mz%20H%20Lote%2015%20Villa%20El%20Salvador%20Lima%20Peru">
+            Cómo llegar <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="mapsec__frame reveal">
+          <iframe
+            title="Mapa de ubicación de Transportes Global BRACAR"
+            src="https://www.google.com/maps?q=Sector%203%20Grupo%2022%20Mz%20H%20Lote%2015%20Villa%20El%20Salvador%20Lima%20Peru&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ============================================================
@@ -704,8 +741,12 @@
   <footer class="footer">
     <div class="footer__grid">
       <div class="footer__brand">
-        <!-- PLACEHOLDER LOGO (footer) -->
+        <!-- LOGO (footer) — misma reconstrucción; reemplazar por el archivo oficial -->
+        <span class="brand__tag">Transportes Global</span>
         <span class="brand__mark brand__mark--footer">BRACAR</span>
+        <svg class="brand__road" viewBox="0 0 160 12" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path d="M2 9 C 46 9, 74 4, 120 3 L 158 2" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 6"/>
+        </svg>
         <p class="footer__desc">Transportes Global BRACAR S.A.C. Transporte de personas seguro, puntual y confiable en todo el Perú.</p>
       </div>
 
@@ -715,6 +756,7 @@
         <a href="#servicios">Servicios</a>
         <a href="#flota">Flota</a>
         <a href="#clientes">Clientes</a>
+        <a href="#ubicacion">Ubicación</a>
         <a href="#contacto">Contacto</a>
       </nav>
 

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-label="Ilustración genérica de unidad">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eff3f8"/><stop offset="1" stop-color="#dbe4ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" fill="url(#bg)"/>
+  <rect x="0" y="252" width="480" height="68" fill="#c9d5e4"/>
+  <ellipse cx="240" cy="252" rx="191" ry="15" fill="#0C1F3A" opacity=".14"/><path d="M58 128 Q58 110 78 110 L378 110 L424 144
+    L424 224 Q424 230 416 230 L66 230
+    Q58 230 58 222 Z" fill="#16345F"/><rect x="74" y="126" width="296" height="42" rx="8" fill="#cfe6ff"/><rect x="146" y="126" width="4" height="42" fill="#16345F"/><rect x="220" y="126" width="4" height="42" fill="#16345F"/><rect x="294" y="126" width="4" height="42" fill="#16345F"/><path d="M382 116 L418 144 L418 168 L382 168 Z" fill="#cfe6ff"/><rect x="58" y="208" width="366" height="12" rx="6" fill="#F5A623"/><rect x="222" y="126" width="3" height="90" fill="#0C1F3A" opacity=".4"/><rect x="408" y="200" width="12" height="12" rx="3" fill="#F5A623"/><g>
+    <circle cx="142" cy="230" r="28" fill="#12181f"/>
+    <circle cx="142" cy="230" r="20.16" fill="#1c2530"/>
+    <circle cx="142" cy="230" r="12.88" fill="#c9d3df"/>
+    <circle cx="142" cy="230" r="5.152000000000001" fill="#8894a6"/>
+  </g><g>
+    <circle cx="352" cy="230" r="28" fill="#12181f"/>
+    <circle cx="352" cy="230" r="20.16" fill="#1c2530"/>
+    <circle cx="352" cy="230" r="12.88" fill="#c9d3df"/>
+    <circle cx="352" cy="230" r="5.152000000000001" fill="#8894a6"/>
+  </g>
+</svg>
