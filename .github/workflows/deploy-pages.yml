@@ -1,0 +1,49 @@
+# ============================================================================
+# Publicación automática en GitHub Pages
+# ----------------------------------------------------------------------------
+# Publica el sitio estático (index.html, css, js, assets) en GitHub Pages.
+# - Se ejecuta al hacer push a la rama de trabajo y también de forma manual.
+# - `enablement: true` intenta ACTIVAR Pages automáticamente (fuente: Actions),
+#   así no hace falta tocar la configuración del repo.
+# ============================================================================
+name: Deploy a GitHub Pages
+
+on:
+  push:
+    branches: ["claude/funny-davinci-0kknqi"]
+  workflow_dispatch:            # permite lanzarlo a mano desde la pestaña Actions
+
+# Permisos mínimos para desplegar en Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evita despliegues solapados; deja terminar el que está en curso
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar (y activar) GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Empaquetar el sitio como artefacto de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."          # sube todo el repositorio (sitio estático en la raíz)
+
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
