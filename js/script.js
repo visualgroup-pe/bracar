@@ -278,4 +278,55 @@
     });
   }
 
+
+  /* ------------------------------------------------------------------------
+     9. RECORRIDO POR EL MAPA DEL PERÚ (hero)
+        Un vehículo recorre la ruta nacional (norte → sur) en bucle y se
+        "transforma" cada 5 s en el siguiente tipo: Auto → Mini Van → Van →
+        Coaster → Minibús → Bus. Las ruedas giran por CSS.
+        - Movimiento con requestAnimationFrame usando getPointAtLength (solo
+          escribe transform: sin reflow).
+        - prefers-reduced-motion: deja el bus estático sobre Lima, sin bucle.
+  ------------------------------------------------------------------------ */
+  const route = document.getElementById("heroRoute");
+  const trip = document.getElementById("tripVehicle");
+
+  if (route && trip) {
+    const vehicles = Array.prototype.slice.call(trip.querySelectorAll(".veh"));
+    const label = document.getElementById("vehLabel");
+    const LAP_MS = 30000;   // una vuelta completa al Perú
+    const SWAP_MS = 5000;   // cambio de vehículo cada 5 s
+
+    const showVehicle = (i) => {
+      vehicles.forEach((v, k) => v.classList.toggle("is-on", k === i));
+      if (label && vehicles[i]) label.textContent = vehicles[i].dataset.name;
+    };
+
+    let total = 0;
+    try { total = route.getTotalLength(); } catch (e) { total = 0; }
+
+    const placeAt = (frac) => {
+      const pt = route.getPointAtLength(frac * total);
+      // -6 en Y: apoya las ruedas sobre la línea de la ruta
+      trip.setAttribute("transform", `translate(${pt.x.toFixed(1)} ${(pt.y - 6).toFixed(1)})`);
+    };
+
+    if (prefersReduced || !total) {
+      // Estático: bus (último) cerca de Lima
+      showVehicle(vehicles.length - 1);
+      if (total) placeAt(0.46);
+    } else {
+      let curType = -1;
+      const start = performance.now();
+      const step = (now) => {
+        const t = now - start;
+        placeAt((t % LAP_MS) / LAP_MS);
+        const idx = Math.floor(t / SWAP_MS) % vehicles.length;
+        if (idx !== curType) { curType = idx; showVehicle(idx); }
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+  }
+
 })();

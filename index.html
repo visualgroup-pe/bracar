@@ -130,129 +130,172 @@
          2. HERO (modo oscuro, composición asimétrica) + BUS ANIMADO
          ============================================================ -->
     <section class="hero" aria-label="Presentación">
-      <!-- Fondo con parallax sutil: siluetas de ciudad -->
+      <!-- Fondo con brillo sutil -->
       <div class="hero__bg" aria-hidden="true">
         <div class="hero__glow"></div>
-        <svg class="skyline skyline--far" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-          <path fill="currentColor" d="M0 220V150h60v-30h50v30h40V90h60v60h50v-40h70v40h60V70h50v80h60v-50h80v50h60V110h60v40h70V80h50v70h60v-30h70v30h60V120h60v100z"/>
-        </svg>
-        <svg class="skyline skyline--near" viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-          <path fill="currentColor" d="M0 200v-60h70v-40h60v40h50v-70h80v70h60v-30h70v30h60v-90h70v90h60v-50h80v50h60v-40h60v40h70v-60h60v60h60v-30h80v30h60v100z"/>
-        </svg>
       </div>
 
-      <div class="hero__content">
-        <div class="hero__eyebrow">
-          <span class="dot" aria-hidden="true"></span>
-          Transporte de personas · Perú
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__eyebrow">
+            <span class="dot" aria-hidden="true"></span>
+            Transporte de personas · Perú
+          </div>
+
+          <h1 class="hero__title">
+            Transporte de personas
+            <span class="hero__title-accent">seguro, puntual</span>
+            y confiable en todo el Perú
+          </h1>
+
+          <p class="hero__subtitle">
+            Personal, corporativo, turístico y traslados.
+            <strong>Atención 24 horas</strong> con una flota moderna y monitoreada por GPS.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--amber btn--lg" href="#contacto">Solicita tu cotización</a>
+            <a class="btn btn--ghost btn--lg"
+               href="https://wa.me/51993546564?text=Hola,%20quisiera%20solicitar%20una%20cotización%20de%20transporte"
+               target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+              WhatsApp
+            </a>
+          </div>
         </div>
 
-        <h1 class="hero__title">
-          Transporte de personas
-          <span class="hero__title-accent">seguro, puntual</span>
-          y confiable en todo el Perú
-        </h1>
-
-        <p class="hero__subtitle">
-          Personal, corporativo, turístico y traslados.
-          <strong>Atención 24 horas</strong> con una flota moderna y monitoreada por GPS.
-        </p>
-
-        <div class="hero__actions">
-          <a class="btn btn--amber btn--lg" href="#contacto">Solicita tu cotización</a>
-          <a class="btn btn--ghost btn--lg"
-             href="https://wa.me/51993546564?text=Hola,%20quisiera%20solicitar%20una%20cotización%20de%20transporte"
-             target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-            WhatsApp
-          </a>
-        </div>
-      </div>
-
-      <!-- Dato fuerte como elemento gráfico -->
-      <div class="hero__stat" aria-hidden="true">
-        <span class="hero__stat-num">+2000</span>
-        <span class="hero__stat-label">servicios<br>realizados</span>
-      </div>
-
-      <!-- ▼▼▼ BLOQUE ANIMACIÓN: CARRETERA + BUS ▼▼▼
-           El bus SVG es fácilmente reemplazable (ver comentario interno).
-      -->
-      <div class="hero__road" aria-hidden="true">
-        <!-- Líneas de velocidad -->
-        <div class="speedlines">
-          <span></span><span></span><span></span>
-        </div>
-
-        <!-- Carril con línea segmentada central animada (parallax en sentido contrario) -->
-        <div class="road">
-          <div class="road__lane"></div>
-        </div>
-
-        <!-- ================= SVG DEL BUS (EDITABLE) =================
-             Bus moderno de BRACAR. Para reemplazarlo por la ilustración
-             o el logo definitivo, sustituye TODO el <svg class="bus">.
-             Colores: carrocería azul marino (#16345F) + acento ámbar.
-             En el costado, un panel marcado "BRACAR" (placeholder de logo).
+        <!-- ▼▼▼ VISUAL ANIMADO: MAPA DEL PERÚ + VEHÍCULO EN RUTA ▼▼▼
+             Un vehículo recorre la ruta nacional (norte→sur) en bucle y se
+             convierte en Auto → Mini Van → Van → Coaster → Minibús → Bus,
+             cambiando cada 5 s (ver js/script.js · sección "recorrido Perú").
+             Ruedas girando y respeto de prefers-reduced-motion.
         -->
-        <div class="bus-track">
-          <svg class="bus" viewBox="0 0 320 130" role="img" aria-label="Bus de BRACAR en movimiento">
-            <!-- Sombra bajo el bus -->
-            <ellipse class="bus__shadow" cx="160" cy="120" rx="130" ry="8" />
-
-            <!-- Carrocería -->
-            <rect class="bus__body" x="8" y="18" width="304" height="84" rx="18" />
-            <!-- Franja de acento inferior -->
-            <rect class="bus__stripe" x="8" y="86" width="304" height="16" rx="8" />
-            <!-- Parabrisas delantero -->
-            <path class="bus__glass" d="M300 30 q10 2 10 16 v14 q0 6 -8 6 h-14 V30 z" />
-
-            <!-- Ventanas (fila) -->
-            <g class="bus__windows">
-              <rect x="150" y="30" width="30" height="26" rx="5" />
-              <rect x="186" y="30" width="30" height="26" rx="5" />
-              <rect x="222" y="30" width="30" height="26" rx="5" />
-              <rect x="258" y="30" width="26" height="26" rx="5" />
-            </g>
-
-            <!-- Puerta -->
-            <rect class="bus__door" x="112" y="30" width="30" height="58" rx="5" />
-            <line class="bus__door-split" x1="127" y1="32" x2="127" y2="86" />
-
-            <!-- Panel lateral con logo (PLACEHOLDER "BRACAR") -->
-            <rect class="bus__panel" x="20" y="34" width="82" height="40" rx="8" />
-            <text class="bus__logo" x="61" y="60">BRACAR</text>
-
-            <!-- Faros -->
-            <circle class="bus__lamp" cx="304" cy="80" r="4" />
-            <circle class="bus__lamp bus__lamp--rear" cx="14" cy="80" r="3.5" />
-
-            <!-- Ruedas (giran de forma continua) -->
-            <g class="wheel" transform="translate(86,102)">
-              <circle class="wheel__tire" r="18" />
-              <circle class="wheel__rim" r="9" />
-              <g class="wheel__spokes">
-                <rect x="-1.5" y="-9" width="3" height="18" rx="1.5" />
-                <rect x="-9" y="-1.5" width="18" height="3" rx="1.5" />
-                <rect x="-1.5" y="-9" width="3" height="18" rx="1.5" transform="rotate(45)" />
-                <rect x="-1.5" y="-9" width="3" height="18" rx="1.5" transform="rotate(-45)" />
-              </g>
-            </g>
-            <g class="wheel" transform="translate(250,102)">
-              <circle class="wheel__tire" r="18" />
-              <circle class="wheel__rim" r="9" />
-              <g class="wheel__spokes">
-                <rect x="-1.5" y="-9" width="3" height="18" rx="1.5" />
-                <rect x="-9" y="-1.5" width="18" height="3" rx="1.5" />
-                <rect x="-1.5" y="-9" width="3" height="18" rx="1.5" transform="rotate(45)" />
-                <rect x="-1.5" y="-9" width="3" height="18" rx="1.5" transform="rotate(-45)" />
-              </g>
-            </g>
-          </svg>
+        <div class="hero__visual" aria-hidden="true">
+          <svg class="perumap" viewBox="0 0 1024 1024" role="img" aria-label="Mapa del Perú: un vehículo recorre la ruta nacional y cambia de tipo cada 5 segundos">
+        <defs>
+          <linearGradient id="mapLand" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#264d84"/><stop offset="1" stop-color="#152f57"/>
+          </linearGradient>
+        </defs>
+        <g class="perumap__land"><g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"
+fill="url(#mapLand)" stroke="#8fb4e6" stroke-width="38" stroke-linejoin="round">
+<path d="M5087 10226 c-3 -8 -20 -22 -38 -31 -27 -14 -38 -15 -73 -5 -94 26
+-173 -11 -94 -44 40 -17 69 -48 96 -102 12 -23 37 -54 57 -70 36 -29 36 -30
+22 -63 -13 -30 -12 -40 4 -95 25 -82 19 -100 -32 -93 -52 7 -58 -3 -106 -182
+l-38 -143 -190 -204 c-114 -123 -229 -236 -289 -283 l-99 -79 -361 -121 -361
+-122 -52 -67 c-28 -37 -68 -88 -88 -114 -32 -41 -35 -49 -25 -68 10 -19 9 -26
+-8 -42 -20 -20 -20 -20 -43 11 -27 36 -56 40 -68 9 -4 -13 -11 -59 -14 -103
+-6 -76 -8 -82 -44 -115 -34 -32 -39 -41 -44 -100 -3 -36 -15 -87 -27 -115 -11
+-27 -24 -81 -29 -120 -7 -65 -10 -71 -43 -92 -84 -53 -92 -63 -85 -103 6 -34
+4 -38 -20 -44 -22 -6 -36 -25 -60 -83 -1 -2 -35 4 -76 13 -98 20 -137 56 -174
+163 -20 57 -36 84 -63 107 -33 28 -40 30 -71 22 -28 -8 -41 -6 -71 11 -21 12
+-46 21 -56 21 -11 0 -39 16 -63 35 l-45 36 -51 -51 c-44 -44 -56 -50 -92 -50
+-61 0 -70 22 -31 77 33 45 32 71 -1 80 -14 3 -22 17 -26 44 -11 63 12 79 79
+53 10 -4 16 -1 16 9 0 9 15 20 34 27 l35 11 -6 87 c-3 48 -12 96 -19 107 -8
+11 -14 28 -14 39 0 11 -9 30 -21 42 l-21 22 -29 -32 c-16 -18 -50 -41 -76 -51
+-119 -45 -208 -117 -217 -175 -5 -34 -10 -38 -41 -44 -28 -6 -35 -11 -35 -31
+0 -17 -20 -40 -75 -85 -74 -60 -75 -62 -75 -108 0 -26 -7 -72 -15 -102 -8 -30
+-15 -66 -15 -79 0 -24 41 -82 109 -154 l36 -38 -22 -42 c-44 -85 -42 -95 34
+-168 37 -36 80 -73 94 -83 48 -30 44 -156 -5 -188 -17 -12 -91 -9 -103 3 -24
+24 -52 -85 -33 -130 9 -24 30 -40 150 -117 19 -13 60 -26 90 -30 30 -3 68 -16
+85 -28 17 -11 84 -48 149 -81 130 -65 178 -105 206 -169 10 -22 32 -54 50 -71
+48 -45 146 -185 160 -230 7 -22 30 -59 51 -83 23 -27 40 -58 44 -82 7 -40 107
+-179 129 -180 13 -1 139 -193 166 -253 10 -23 36 -56 58 -74 43 -35 59 -81 41
+-115 -9 -16 -5 -29 23 -71 37 -56 58 -107 58 -142 0 -16 9 -26 30 -35 17 -7
+30 -17 30 -22 0 -5 11 -20 24 -33 17 -17 30 -52 46 -120 19 -84 26 -98 54
+-120 31 -23 34 -31 39 -97 5 -57 13 -82 40 -127 19 -31 41 -76 48 -101 13 -45
+69 -128 140 -206 58 -65 111 -184 120 -273 4 -42 8 -77 8 -78 1 -1 22 -14 49
+-30 92 -53 111 -75 171 -199 31 -66 65 -149 75 -186 l18 -68 84 -57 c80 -54
+84 -58 84 -94 0 -29 12 -55 56 -118 30 -45 64 -85 74 -91 12 -6 20 -26 25 -60
+4 -32 17 -62 36 -86 16 -20 29 -43 29 -51 0 -8 20 -36 45 -62 25 -27 52 -69
+61 -94 14 -42 14 -51 0 -101 -9 -30 -16 -66 -16 -81 0 -24 -3 -27 -25 -23 -35
+7 -48 -36 -17 -58 14 -10 23 -30 27 -68 6 -48 11 -57 44 -78 26 -17 36 -30 36
+-50 0 -19 12 -37 44 -64 45 -39 80 -101 81 -141 0 -13 6 -23 14 -23 7 0 36
+-18 64 -40 28 -22 67 -47 89 -56 51 -21 90 -59 119 -116 14 -27 37 -54 53 -63
+22 -11 28 -20 24 -35 -3 -11 -1 -20 4 -20 6 0 35 -25 67 -55 31 -30 80 -67
+109 -81 28 -15 78 -44 110 -65 32 -22 70 -42 85 -45 15 -4 45 -23 67 -44 47
+-44 95 -64 132 -57 23 4 41 -7 123 -83 l95 -88 75 -11 c115 -18 150 -30 210
+-72 31 -21 63 -39 71 -39 9 0 26 -11 39 -25 13 -14 31 -25 41 -25 9 0 54 -16
+99 -35 45 -19 91 -35 103 -35 28 0 106 -24 145 -44 19 -10 33 -26 37 -45 4
+-20 14 -31 31 -35 14 -4 48 -25 76 -46 27 -22 58 -40 68 -40 11 0 33 -18 50
+-39 20 -25 43 -41 63 -45 18 -3 60 -20 94 -38 56 -28 66 -37 93 -91 16 -33 30
+-75 30 -93 0 -26 7 -38 38 -60 21 -15 50 -44 65 -65 22 -30 35 -38 73 -44 41
+-6 56 -16 118 -77 39 -39 103 -91 141 -116 61 -40 78 -46 135 -50 48 -3 81 2
+130 18 83 28 110 48 139 104 l23 45 -21 78 c-19 70 -19 79 -5 100 12 19 23 23
+53 22 28 -2 47 4 73 24 31 24 37 35 43 83 6 48 4 58 -12 69 -48 35 -51 39 -42
+70 6 21 22 38 58 57 26 15 57 40 66 55 10 16 40 53 67 84 26 30 48 62 48 70 0
+8 21 25 46 38 44 24 45 26 39 61 -7 39 6 56 83 117 l24 18 -45 33 c-35 25 -56
+32 -90 32 -29 0 -52 6 -64 18 -21 18 -87 216 -97 287 -7 55 38 151 88 190 47
+36 50 77 7 99 -16 9 -43 33 -60 54 -26 34 -29 43 -22 73 5 19 12 46 15 61 4
+18 14 28 29 30 18 2 23 10 25 41 2 26 10 42 27 53 13 8 26 26 29 39 3 13 24
+38 46 55 33 26 40 38 40 66 0 30 5 36 38 51 20 10 38 18 40 19 6 3 -32 81 -55
+111 -17 22 -27 53 -34 100 -11 92 -12 88 14 120 21 26 22 35 19 161 -2 72 -8
+132 -13 132 -5 0 -86 -34 -180 -76 l-172 -76 -126 65 c-138 71 -297 127 -363
+127 l-41 0 23 -24 23 -25 -27 -7 c-55 -13 -260 21 -300 50 -17 13 -53 29 -81
+36 -27 7 -68 23 -90 35 -25 14 -66 25 -108 28 -108 10 -161 61 -150 145 8 58
+-18 111 -73 153 -24 18 -47 42 -50 53 -9 28 -53 86 -65 86 -20 0 -70 42 -80
+66 -5 16 -4 53 3 102 10 65 18 87 55 139 36 51 43 70 42 101 -2 29 5 49 30 86
+33 47 33 48 18 92 -16 50 -14 51 54 27 73 -26 146 -8 248 62 54 38 89 55 110
+55 72 0 174 80 247 192 36 56 44 77 44 114 0 42 4 49 53 94 47 43 56 58 76
+125 14 48 19 88 16 108 -5 25 -2 37 14 51 23 21 19 36 -10 36 -28 0 -190 -111
+-231 -159 -19 -23 -40 -41 -45 -41 -6 0 -39 -19 -73 -42 -34 -22 -81 -45 -104
+-50 -22 -5 -132 -12 -243 -15 l-203 -6 0 60 c0 46 -4 64 -19 77 -10 10 -24 37
+-30 62 -13 51 -41 84 -72 84 -12 0 -37 9 -55 21 -28 17 -61 22 -196 30 -90 6
+-166 14 -170 17 -4 4 7 25 23 47 62 86 69 100 69 145 0 38 -8 57 -51 118 -28
+39 -58 72 -67 72 -28 0 -72 51 -72 83 0 23 -13 42 -59 86 -49 47 -61 66 -76
+119 -15 50 -26 69 -56 93 -46 37 -58 75 -30 102 16 16 17 24 9 43 -7 14 -20
+24 -32 24 -13 0 -43 21 -71 50 -38 39 -46 53 -37 62 7 7 12 24 12 39 0 34 19
+54 66 69 53 18 65 66 28 111 -12 13 -10 27 12 91 21 64 32 82 73 116 71 60
+142 102 172 102 29 0 73 30 91 63 6 12 10 49 9 82 -1 52 -5 64 -29 86 l-28 25
+18 40 c10 21 18 46 18 55 0 9 25 38 55 63 68 59 86 108 62 173 -16 42 -15 43
+9 72 19 23 24 40 24 84 0 62 2 65 85 98 33 13 69 33 80 45 11 12 36 27 55 34
+48 18 58 27 65 61 4 19 13 29 25 29 32 0 129 40 142 59 7 9 40 34 73 54 55 34
+67 37 135 37 41 0 97 7 124 15 27 8 62 15 77 15 16 0 32 7 38 17 8 15 15 16
+63 6 42 -9 58 -8 80 3 15 8 37 14 50 14 17 0 29 11 43 37 43 80 49 84 134 84
+42 -1 85 -1 96 0 46 0 85 -14 85 -31 0 -22 70 -54 98 -45 13 3 31 -1 47 -11
+14 -9 27 -15 29 -13 1 2 12 20 25 41 l22 36 -55 31 c-62 36 -71 45 -80 86 -4
+16 -22 45 -39 65 -18 19 -40 45 -49 58 l-16 24 -40 -25 c-45 -29 -102 -28
+-140 3 l-23 19 186 288 c179 279 185 288 163 298 -31 13 -68 46 -68 59 0 6
+-45 28 -101 49 -72 28 -114 51 -150 83 -86 76 -93 79 -132 56 -18 -12 -81 -31
+-141 -43 -100 -20 -110 -20 -118 -5 -5 9 -17 16 -27 16 -10 0 -29 8 -42 19
+-13 10 -48 29 -77 41 -63 27 -61 28 -185 -69 -75 -58 -96 -70 -135 -73 -26 -3
+-57 -1 -70 4 -34 12 -137 10 -166 -3 -19 -9 -29 -9 -39 -1 -9 8 -23 7 -52 -3
+-22 -8 -47 -14 -55 -14 -8 0 -44 26 -80 58 -62 56 -64 60 -52 85 18 41 14 118
+-10 181 -20 53 -23 56 -49 50 -40 -9 -91 3 -124 29 -26 21 -28 29 -30 92 0 46
+-7 77 -18 95 -23 35 -95 85 -135 94 -18 3 -37 15 -42 26 -6 10 -17 19 -25 19
+-8 0 -32 16 -54 35 -28 26 -47 35 -74 35 -28 0 -40 7 -62 36 -18 23 -26 43
+-22 60 3 15 -4 35 -19 56 -13 17 -24 38 -24 46 0 23 -42 91 -60 97 -8 3 -23
+18 -32 33 -10 17 -32 34 -56 41 -29 10 -43 23 -61 57 -22 40 -27 44 -62 44
+-29 0 -42 6 -56 26 -10 14 -46 37 -78 50 -85 36 -92 37 -98 20z"/>
+</g></g>
+        <path class="perumap__route-base" d="M338 168 C 360 250 352 372 430 458 C 486 520 500 566 520 616 C 552 700 584 726 618 760 C 668 812 700 840 726 866 C 766 906 792 936 812 958"/>
+        <path id="heroRoute" class="perumap__route" d="M338 168 C 360 250 352 372 430 458 C 486 520 500 566 520 616 C 552 700 584 726 618 760 C 668 812 700 840 726 866 C 766 906 792 936 812 958"/>
+        <g class="perumap__cities">
+          <circle class="perumap__city" cx="455" cy="520" r="10"/>
+          <text class="perumap__label" x="474" y="528">Lima</text>
+          <circle class="perumap__city perumap__city--sm" cx="345" cy="232" r="7"/>
+          <circle class="perumap__city perumap__city--sm" cx="740" cy="882" r="7"/>
+        </g>
+        <g id="tripVehicle" class="tripveh">
+          <g class="veh" data-name="Auto"><path d="M-16 -32 L-4 -50 Q0 -53 7 -53 L16 -53 Q23 -53 27 -47 L34 -32 Z" fill="#EAF0F8"/><rect x="-52" y="-32" width="104" height="26" rx="10" fill="#EAF0F8"/><path d="M-2 -48 L13 -48 L17 -34 L-11 -34 Z" fill="#16345F"/><rect x="-49" y="-15" width="98" height="5" rx="2.5" fill="#F5A623"/><rect x="46" y="-26" width="6" height="6" rx="2" fill="#F5A623"/><g class="tw" style="transform-origin:-27px -4px"><circle cx="-27" cy="-4" r="9" fill="#0C1F3A"/><circle cx="-27" cy="-4" r="4.5" fill="#c9d3df"/><rect x="-28.2" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="-36" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g><g class="tw" style="transform-origin:29px -4px"><circle cx="29" cy="-4" r="9" fill="#0C1F3A"/><circle cx="29" cy="-4" r="4.5" fill="#c9d3df"/><rect x="27.8" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="20" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g></g>
+          <g class="veh" data-name="Mini Van"><path d="M-56 -31 Q-56 -40 -47 -40 L43 -40 L56 -25 L56 -8 Q56 -4 51 -4 L-51 -4 Q-56 -4 -56 -9 Z" fill="#EAF0F8"/><rect x="-49" y="-33" width="84" height="18.400000000000002" rx="3" fill="#16345F"/><rect x="-22" y="-33" width="2" height="18.400000000000002" fill="#EAF0F8"/><rect x="6" y="-33" width="2" height="18.400000000000002" fill="#EAF0F8"/><path d="M45 -36 L53 -25 L53 -14.599999999999998 L45 -14.599999999999998 Z" fill="#16345F"/><rect x="-53" y="-13" width="106" height="5" rx="2.5" fill="#F5A623"/><rect x="50" y="-17" width="5" height="6" rx="2" fill="#F5A623"/><g class="tw" style="transform-origin:-39px -4px"><circle cx="-39" cy="-4" r="9" fill="#0C1F3A"/><circle cx="-39" cy="-4" r="4.5" fill="#c9d3df"/><rect x="-40.2" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="-48" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g><g class="tw" style="transform-origin:39px -4px"><circle cx="39" cy="-4" r="9" fill="#0C1F3A"/><circle cx="39" cy="-4" r="4.5" fill="#c9d3df"/><rect x="37.8" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="30" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g></g>
+          <g class="veh" data-name="Van"><path d="M-63 -35 Q-63 -44 -54 -44 L50 -44 L63 -29 L63 -8 Q63 -4 58 -4 L-58 -4 Q-63 -4 -63 -9 Z" fill="#EAF0F8"/><rect x="-56" y="-37" width="98" height="20.240000000000002" rx="3" fill="#16345F"/><rect x="-32.5" y="-37" width="2" height="20.240000000000002" fill="#EAF0F8"/><rect x="-8" y="-37" width="2" height="20.240000000000002" fill="#EAF0F8"/><rect x="16.5" y="-37" width="2" height="20.240000000000002" fill="#EAF0F8"/><path d="M52 -40 L60 -29 L60 -16.759999999999998 L52 -16.759999999999998 Z" fill="#16345F"/><rect x="-60" y="-13" width="120" height="5" rx="2.5" fill="#F5A623"/><rect x="57" y="-17" width="5" height="6" rx="2" fill="#F5A623"/><g class="tw" style="transform-origin:-46px -4px"><circle cx="-46" cy="-4" r="9" fill="#0C1F3A"/><circle cx="-46" cy="-4" r="4.5" fill="#c9d3df"/><rect x="-47.2" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="-55" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g><g class="tw" style="transform-origin:46px -4px"><circle cx="46" cy="-4" r="9" fill="#0C1F3A"/><circle cx="46" cy="-4" r="4.5" fill="#c9d3df"/><rect x="44.8" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="37" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g></g>
+          <g class="veh" data-name="Coaster"><rect x="-65" y="-46" width="130" height="46" rx="8" fill="#EAF0F8"/><rect x="-57" y="-38" width="100" height="19.32" rx="3" fill="#16345F"/><rect x="-38" y="-38" width="2" height="19.32" fill="#EAF0F8"/><rect x="-18" y="-38" width="2" height="19.32" fill="#EAF0F8"/><rect x="2" y="-38" width="2" height="19.32" fill="#EAF0F8"/><rect x="22" y="-38" width="2" height="19.32" fill="#EAF0F8"/><rect x="49" y="-38" width="10" height="32" rx="2" fill="#16345F"/><rect x="-62" y="-14" width="124" height="6" rx="3" fill="#F5A623"/><rect x="59" y="-18" width="5" height="6" rx="2" fill="#F5A623"/><g class="tw" style="transform-origin:-49px -4px"><circle cx="-49" cy="-4" r="9" fill="#0C1F3A"/><circle cx="-49" cy="-4" r="4.5" fill="#c9d3df"/><rect x="-50.2" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="-58" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g><g class="tw" style="transform-origin:49px -4px"><circle cx="49" cy="-4" r="9" fill="#0C1F3A"/><circle cx="49" cy="-4" r="4.5" fill="#c9d3df"/><rect x="47.8" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="40" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g></g>
+          <g class="veh" data-name="Minibús"><rect x="-70" y="-50" width="140" height="50" rx="8" fill="#EAF0F8"/><rect x="-62" y="-42" width="110" height="21" rx="3" fill="#16345F"/><rect x="-44.66666666666667" y="-42" width="2" height="21" fill="#EAF0F8"/><rect x="-26.333333333333336" y="-42" width="2" height="21" fill="#EAF0F8"/><rect x="-8" y="-42" width="2" height="21" fill="#EAF0F8"/><rect x="10.333333333333329" y="-42" width="2" height="21" fill="#EAF0F8"/><rect x="28.666666666666657" y="-42" width="2" height="21" fill="#EAF0F8"/><rect x="54" y="-42" width="10" height="36" rx="2" fill="#16345F"/><rect x="-67" y="-14" width="134" height="6" rx="3" fill="#F5A623"/><rect x="64" y="-18" width="5" height="6" rx="2" fill="#F5A623"/><g class="tw" style="transform-origin:-54px -4px"><circle cx="-54" cy="-4" r="9" fill="#0C1F3A"/><circle cx="-54" cy="-4" r="4.5" fill="#c9d3df"/><rect x="-55.2" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="-63" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g><g class="tw" style="transform-origin:54px -4px"><circle cx="54" cy="-4" r="9" fill="#0C1F3A"/><circle cx="54" cy="-4" r="4.5" fill="#c9d3df"/><rect x="52.8" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="45" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g></g>
+          <g class="veh is-on" data-name="Bus"><rect x="-24.319999999999993" y="-60" width="48.64" height="5" rx="2" fill="#16345F"/><rect x="-76" y="-56" width="152" height="56" rx="8" fill="#EAF0F8"/><rect x="-68" y="-48" width="122" height="23.52" rx="3" fill="#16345F"/><rect x="-51.57142857142857" y="-48" width="2" height="23.52" fill="#EAF0F8"/><rect x="-34.142857142857146" y="-48" width="2" height="23.52" fill="#EAF0F8"/><rect x="-16.714285714285722" y="-48" width="2" height="23.52" fill="#EAF0F8"/><rect x="0.7142857142857082" y="-48" width="2" height="23.52" fill="#EAF0F8"/><rect x="18.14285714285714" y="-48" width="2" height="23.52" fill="#EAF0F8"/><rect x="35.571428571428555" y="-48" width="2" height="23.52" fill="#EAF0F8"/><rect x="60" y="-48" width="10" height="42" rx="2" fill="#16345F"/><rect x="-73" y="-14" width="146" height="6" rx="3" fill="#F5A623"/><rect x="70" y="-18" width="5" height="6" rx="2" fill="#F5A623"/><g class="tw" style="transform-origin:-60px -4px"><circle cx="-60" cy="-4" r="9" fill="#0C1F3A"/><circle cx="-60" cy="-4" r="4.5" fill="#c9d3df"/><rect x="-61.2" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="-69" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g><g class="tw" style="transform-origin:60px -4px"><circle cx="60" cy="-4" r="9" fill="#0C1F3A"/><circle cx="60" cy="-4" r="4.5" fill="#c9d3df"/><rect x="58.8" y="-13" width="2.4" height="18" fill="#8894a6"/><rect x="51" y="-5.2" width="18" height="2.4" fill="#8894a6"/></g></g>
+        </g>
+      </svg>
+          <div class="hero__vehlabel">
+            <span class="hero__vehlabel-k">En ruta</span>
+            <span class="hero__vehlabel-v" id="vehLabel">Bus</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-num">+2000</span>
+            <span class="hero__stat-label">servicios<br>realizados</span>
+          </div>
         </div>
-        <!-- ================= FIN SVG DEL BUS ================= -->
+        <!-- ▲▲▲ FIN VISUAL ANIMADO ▲▲▲ -->
       </div>
-      <!-- ▲▲▲ FIN BLOQUE ANIMACIÓN ▲▲▲ -->
     </section>
 
     <!-- ============================================================

@@ -6,7 +6,9 @@ BRACAR S.A.C.**, empresa peruana de transporte de personas. Construida con
 lista para publicar en cualquier hosting estático.
 
 Concepto de diseño: **"movimiento, ruta y confianza"** — hero en modo oscuro con
-un bus animado en SVG, motivo gráfico de "ruta" que se dibuja al hacer scroll,
+un vehículo que recorre el **mapa del Perú** por una ruta nacional y se
+**transforma cada 5 s** (Auto → Mini Van → Van → Coaster → Minibús → Bus),
+motivo gráfico de "ruta" que se dibuja al hacer scroll,
 retícula editorial asimétrica, números grandes como elemento gráfico y bloques de
 color alternados para dar ritmo.
 
@@ -72,9 +74,15 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   ```html
   <img src="assets/img/logo.svg" alt="Transportes Global BRACAR" class="brand__logo" />
   ```
-- El **bus del hero** lleva un panel lateral con el texto "BRACAR"
-  (`<text class="bus__logo">`). Puedes cambiar ese texto o incrustar el logo
-  dentro del `<svg class="bus">` (bloque comentado "SVG DEL BUS (EDITABLE)").
+- La **animación del hero** (mapa del Perú con un vehículo recorriendo la ruta)
+  está marcada en `index.html` con el comentario "VISUAL ANIMADO". Para
+  ajustarla:
+  - **Ruta:** edita el atributo `d` de `#heroRoute` (y de `.perumap__route-base`)
+    dentro del `<svg class="perumap">`.
+  - **Velocidad y cambio de vehículo:** variables `LAP_MS` (una vuelta) y
+    `SWAP_MS` (cada cuánto cambia de tipo) en la sección 9 de `js/script.js`.
+  - **Silueta del Perú:** es un `<g class="perumap__land">` (silueta de mapsicon,
+    licencia MIT); su color sale del degradado `#mapLand` del propio SVG.
 
 ### 2. Fotos de la flota
 - Por ahora cada unidad usa una **ilustración genérica en SVG** (colores de la
