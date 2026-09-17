@@ -295,7 +295,7 @@
     const vehicles = Array.prototype.slice.call(trip.querySelectorAll(".veh"));
     const label = document.getElementById("vehLabel");
     const LAP_MS = 30000;   // una vuelta completa al Perú
-    const SWAP_MS = 5000;   // cambio de vehículo cada 5 s
+    const SWAP_MS = 2500;   // cambio de vehículo cada 2.5 s
 
     const showVehicle = (i) => {
       vehicles.forEach((v, k) => v.classList.toggle("is-on", k === i));

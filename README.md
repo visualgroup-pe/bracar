@@ -7,7 +7,8 @@ lista para publicar en cualquier hosting estático.
 
 Concepto de diseño: **"movimiento, ruta y confianza"** — hero en modo oscuro con
 un vehículo que recorre el **mapa del Perú** por una ruta nacional y se
-**transforma cada 5 s** (Auto → Mini Van → Van → Coaster → Minibús → Bus),
+**transforma cada 2.5 s** (Auto → Mini Van → Van → Coaster → Minibús → Bus,
+con el logo BRACAR y pasajeros saludando),
 motivo gráfico de "ruta" que se dibuja al hacer scroll,
 retícula editorial asimétrica, números grandes como elemento gráfico y bloques de
 color alternados para dar ritmo.

@@ -458,6 +458,20 @@ section[id], header[id] { scroll-margin-top: 84px; }
 .tripveh .veh.is-on { opacity: 1; transform: scale(1); }
 /* Ruedas girando (cada una rota sobre su propio centro vía transform-origin inline) */
 .tripveh .tw { animation: wheelSpin 0.7s linear infinite; will-change: transform; }
+/* Logo "BRACAR" en el costado del vehículo */
+.veh-logo {
+  fill: var(--navy);
+  font-family: var(--ff-head);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+/* Personitas contentas encima: leve rebote + brazo que saluda */
+.tripveh .person { animation: personBob 1.5s ease-in-out infinite; }
+.tripveh .arm-wave {
+  transform-box: fill-box;
+  transform-origin: left bottom;   /* pivota en el hombro */
+  animation: wave 0.8s ease-in-out infinite alternate;
+}
 
 /* Etiqueta del tipo de vehículo actual (cambia cada 5 s) */
 .hero__vehlabel {
@@ -1114,6 +1128,15 @@ section[id], header[id] { scroll-margin-top: 84px; }
 /* Giro de ruedas */
 @keyframes wheelSpin {
   to { transform: rotate(360deg); }
+}
+/* Personitas: saludo (brazo) y rebote alegre */
+@keyframes wave {
+  from { transform: rotate(-12deg); }
+  to   { transform: rotate(26deg); }
+}
+@keyframes personBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1.6px); }
 }
 /* Línea central de la carretera (sentido contrario = sensación de avance) */
 @keyframes laneMove {
