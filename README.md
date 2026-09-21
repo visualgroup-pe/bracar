@@ -100,11 +100,11 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   las coordenadas correctas.
 
 ### 3. Logos de clientes
-- Ya integrados: 17 logos en `assets/img/clientes/` (grises por defecto, a color
-  al pasar el cursor). **Faltan 3** por subir: **Imesac, Pecord Corporation y
-  CAFAE** (por ahora se muestran como texto). Para añadirlos, sube el archivo a
-  `assets/img/clientes/` y cambia el `<li class="logo logo--text">Nombre</li>`
-  por `<li class="logo"><img src="assets/img/clientes/archivo.png" alt="Nombre"></li>`.
+- Ya integrados: 17 logos en `assets/img/clientes/`, a tamaño estandarizado y
+  con sus **colores originales**. **Faltan 3** por subir: **Imesac, Pecord
+  Corporation y CAFAE** (se omiten hasta tener su logo). Para añadirlos, sube el
+  archivo a `assets/img/clientes/` y agrega en AMBAS listas del marquee:
+  `<li class="logo"><img src="assets/img/clientes/archivo.png" alt="Nombre"></li>`.
 - **Importante:** el carrusel duplica la lista (hay un segundo `<ul>` con
   `aria-hidden="true"`) para el loop infinito. Actualiza **ambas** listas.
 
