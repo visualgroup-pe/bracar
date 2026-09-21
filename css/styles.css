@@ -280,32 +280,20 @@ section[id], header[id] { scroll-margin-top: 84px; }
    en grande debajo (azul marino), con un trazo de carretera (motivo "ruta").
    Los colores se adaptan al fondo (claros sobre el hero oscuro; de marca
    sobre la navbar clara) para mantener la legibilidad. */
-.brand { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px; }
-/* "TRANSPORTES GLOBAL" (arriba, gris) */
-.brand__tag {
-  font-family: var(--ff-head);
-  font-weight: 700;
-  font-size: 0.6rem;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: rgba(234, 240, 248, 0.72);
-  transition: color var(--t-med);
+.brand { display: inline-flex; align-items: center; }
+/* Logo oficial (PNG transparente) dentro de un "chip" blanco para que sea
+   legible tanto sobre el hero oscuro como sobre la navbar clara. */
+.brand__logo {
+  display: block;
+  height: 34px; width: auto;
+  background: #fff;
+  padding: 7px 13px;
+  border-radius: 10px;
+  box-sizing: content-box;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);   /* realce sobre el hero oscuro */
+  transition: box-shadow var(--t-med);
 }
-/* "BRACAR" (grande) — Archivo 900 para un trazo geométrico ancho, no condensado */
-.brand__mark {
-  font-family: var(--ff-head);
-  font-weight: 900;
-  font-size: clamp(1.5rem, 2vw, 1.9rem);
-  letter-spacing: 0.005em;
-  color: var(--on-dark);            /* claro sobre el hero oscuro */
-  transition: color var(--t-med);
-}
-/* Trazo de carretera bajo el wordmark */
-.brand__road { width: 100%; height: 8px; margin-top: 1px; overflow: visible; }
-.brand__road path { stroke: var(--amber); }
-/* Navbar sólida: colores reales de la marca */
-.nav.is-scrolled .brand__tag { color: #5b6b80; }
-.nav.is-scrolled .brand__mark { color: var(--navy); }
+.nav.is-scrolled .brand__logo { box-shadow: none; }   /* se integra en la navbar clara */
 
 /* --- Menú --- */
 .nav__menu { display: flex; align-items: center; gap: clamp(1rem, 2vw, 2rem); }
@@ -875,26 +863,21 @@ section[id], header[id] { scroll-margin-top: 84px; }
 }
 .marquee:hover .marquee__track { animation-play-state: paused; } /* pausa al hover */
 .marquee__group { display: flex; }
+/* Logos SIN caja: van sueltos sobre el fondo, grandes y a color siempre */
 .logo {
   flex: none;
   display: grid; place-items: center;
-  height: 130px; width: 260px;      /* tamaño uniforme y grande */
-  margin: 0 var(--sp-2);
-  padding: var(--sp-3) var(--sp-4);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-sm);
-  transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  height: 128px;                                   /* alto uniforme grande */
+  margin: 0 clamp(1.4rem, 3.4vw, 3rem);            /* separación entre logos */
 }
-.logo:hover { border-color: var(--amber); transform: translateY(-4px); box-shadow: var(--shadow-md); }
-/* Logos a TAMAÑO ESTANDARIZADO, con sus colores originales (sin gris) */
 .logo img {
-  max-height: 84px;
-  max-width: 210px;
+  max-height: 92px;                                /* estandariza el alto */
+  max-width: 300px;
   width: auto; height: auto;
   object-fit: contain;
+  transition: transform var(--t-fast);
 }
+.logo:hover img { transform: scale(1.06); }        /* leve realce (opcional) */
 
 
 /* ============================================================================
@@ -1085,10 +1068,8 @@ section[id], header[id] { scroll-margin-top: 84px; }
   padding-bottom: var(--sp-5);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-.footer__brand { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
-.brand__mark--footer { color: var(--on-dark); font-size: 2rem; }
-.footer__brand .brand__tag { color: var(--on-dark-muted); }
-.footer__brand .brand__road { max-width: 190px; }
+.footer__brand { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
+.brand__logo--footer { height: 44px; padding: 9px 15px; box-shadow: none; }
 .footer__desc { font-size: var(--fs-sm); margin-top: var(--sp-2); max-width: 40ch; }
 .footer__col h4 {
   font-family: var(--ff-head); font-weight: 700;

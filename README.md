@@ -116,9 +116,13 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   `<figcaption>` de cada tarjeta.
 
 ### 4b. Logo oficial BRACAR
-- Tu logo está en `assets/img/logo-bracar.jpg`. Aún no está incrustado en la
-  navbar/footer (siguen con la reconstrucción en texto); podemos reemplazarlo
-  cuando quieras por `<img src="assets/img/logo-bracar.jpg" alt="…">`.
+- **Ya incrustado** en la navbar y el footer usando `assets/img/logo-bracar.png`
+  (versión con fondo transparente, generada desde tu `logo-bracar.jpg`). Se
+  muestra sobre un "chip" blanco (`.brand__logo`) para que sea legible tanto
+  sobre el hero oscuro como sobre la navbar clara.
+- Los logos de clientes se procesaron a **PNG con fondo transparente** (sin
+  caja), a color y a tamaño estandarizado; el único con fondo propio es Oslo
+  (logo blanco sobre azul).
 
 ### 5. Redes sociales
 - Enlaces de **Facebook** e **Instagram** con `href="#"` en la sección de
