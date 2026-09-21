@@ -329,4 +329,44 @@
     }
   }
 
+
+  /* ------------------------------------------------------------------------
+     10. WIDGET DE WHATSAPP (popup del asesor BRACAR)
+        Al hacer clic en el botón flotante se abre/cierra un popup de
+        bienvenida. El botón verde del popup abre WhatsApp.
+  ------------------------------------------------------------------------ */
+  const waWidget = document.getElementById("waWidget");
+  const waToggle = document.getElementById("waToggle");
+  const waClose = document.getElementById("waClose");
+  const waPop = document.getElementById("waPop");
+
+  if (waWidget && waToggle && waPop) {
+    const openWa = () => {
+      waWidget.classList.add("is-open");
+      waPop.hidden = false;
+      waToggle.setAttribute("aria-expanded", "true");
+      waToggle.setAttribute("aria-label", "Cerrar chat con el asesor");
+    };
+    const closeWa = () => {
+      waWidget.classList.remove("is-open");
+      waPop.hidden = true;
+      waToggle.setAttribute("aria-expanded", "false");
+      waToggle.setAttribute("aria-label", "Chatea con un asesor de BRACAR");
+    };
+
+    waToggle.addEventListener("click", () => {
+      waWidget.classList.contains("is-open") ? closeWa() : openWa();
+    });
+    if (waClose) waClose.addEventListener("click", closeWa);
+
+    // Cierra con Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && waWidget.classList.contains("is-open")) closeWa();
+    });
+    // Cierra al hacer clic fuera del widget
+    document.addEventListener("click", (e) => {
+      if (waWidget.classList.contains("is-open") && !waWidget.contains(e.target)) closeWa();
+    });
+  }
+
 })();

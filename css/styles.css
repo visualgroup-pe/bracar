@@ -1080,22 +1080,98 @@ section[id], header[id] { scroll-margin-top: 84px; }
   font-size: var(--fs-xs);
 }
 
-/* Botón flotante de WhatsApp */
-.wa-float {
+/* --- WIDGET WHATSAPP: botón flotante + popup con asesor --- */
+.wa-widget {
   position: fixed;
   right: clamp(1rem, 3vw, 2rem);
   bottom: clamp(1rem, 3vw, 2rem);
-  z-index: 90;
+  z-index: 95;
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 14px;
+}
+
+/* Popup de bienvenida */
+.wa-pop {
+  width: min(90vw, 322px);
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 22px 55px rgba(12, 31, 58, 0.32);
+  transform-origin: bottom right;
+}
+.wa-widget:not(.is-open) .wa-pop { display: none; }
+.wa-widget.is-open .wa-pop { animation: waPopIn 0.26s var(--ease); }
+
+.wa-pop__head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 12px 12px 14px;
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+  color: #fff;
+}
+.wa-pop__avatar {
+  width: 52px; height: 52px; flex: none;
+  border-radius: 50%; overflow: hidden;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+.wa-pop__avatar svg { width: 100%; height: 100%; display: block; }
+.wa-pop__who { display: flex; flex-direction: column; line-height: 1.25; }
+.wa-pop__who strong { font-family: var(--ff-head); font-size: 0.98rem; }
+.wa-pop__status { font-size: 0.72rem; color: #9fe3b4; display: inline-flex; align-items: center; gap: 5px; }
+.wa-pop__status i {
+  width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6); animation: pulse 2s ease-out infinite;
+}
+.wa-pop__close {
+  margin-left: auto; color: #fff; opacity: 0.75;
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px;
+  transition: opacity var(--t-fast), background var(--t-fast);
+}
+.wa-pop__close:hover { opacity: 1; background: rgba(255, 255, 255, 0.12); }
+
+.wa-pop__body { padding: 16px 14px; background: #ECE5DD; }   /* fondo estilo chat */
+.wa-bubble {
+  background: #fff; border-radius: 4px 14px 14px 14px;
+  padding: 11px 13px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+  font-size: 0.86rem; color: #2b2b2b;
+}
+.wa-bubble p { margin: 0 0 6px; }
+.wa-bubble p:last-of-type { margin-bottom: 2px; }
+.wa-bubble strong { color: var(--navy); }
+.wa-bubble__time { display: block; font-size: 0.64rem; color: #90a0a8; text-align: right; }
+
+.wa-pop__cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: #25D366; color: #fff;
+  font-family: var(--ff-head); font-weight: 700; font-size: 0.92rem;
+  padding: 13px; text-decoration: none;
+  transition: background var(--t-fast);
+}
+.wa-pop__cta:hover { background: #1EBE5A; }
+
+/* Botón flotante (verde) dentro del widget */
+.wa-float {
+  position: relative;
   width: 60px; height: 60px;
   display: grid; place-items: center;
-  background: #25D366;
-  color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 12px 28px rgba(37,211,102,0.45);
+  background: #25D366; color: #fff; border-radius: 50%;
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
   transition: transform var(--t-fast), box-shadow var(--t-fast);
   animation: waPulse 2.6s ease-out infinite;
 }
 .wa-float:hover { transform: scale(1.08); }
+.wa-float > * { grid-area: 1 / 1; }                 /* apila iconos en la misma celda */
+.wa-float__badge {
+  position: absolute; top: -3px; right: -3px; z-index: 2;
+  min-width: 18px; height: 18px; padding: 0 4px;
+  background: var(--amber); color: var(--navy-900);
+  font: 700 11px/18px var(--ff-head); text-align: center;
+  border-radius: 9px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.wa-ico--x { display: none; }
+.wa-widget.is-open .wa-float { animation: none; }   /* detiene el pulso al abrir */
+.wa-widget.is-open .wa-float__badge { display: none; }
+.wa-widget.is-open .wa-ico--wa { display: none; }
+.wa-widget.is-open .wa-ico--x { display: block; }
 
 
 /* ============================================================================
@@ -1152,6 +1228,11 @@ section[id], header[id] { scroll-margin-top: 84px; }
   0%   { box-shadow: 0 12px 28px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0.5); }
   70%  { box-shadow: 0 12px 28px rgba(37,211,102,0.45), 0 0 0 16px rgba(37,211,102,0); }
   100% { box-shadow: 0 12px 28px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0); }
+}
+/* Aparición del popup del asesor */
+@keyframes waPopIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.94); }
+  to   { opacity: 1; transform: none; }
 }
 
 

@@ -78,16 +78,74 @@
   </svg>
 
   <!-- ============================================================
-       BOTÓN FLOTANTE DE WHATSAPP
+       WIDGET WHATSAPP: botón flotante + popup con asesor BRACAR.
+       Al hacer clic en el botón se abre un popup de bienvenida con el
+       asesor; el botón verde del popup abre WhatsApp. (JS: sección 10)
        ============================================================ -->
-  <a class="wa-float"
-     href="https://wa.me/51993546564?text=Hola,%20quisiera%20solicitar%20una%20cotización%20de%20transporte"
-     target="_blank" rel="noopener"
-     aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
-      <path fill="currentColor" d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3C4.4 15 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/>
-    </svg>
-  </a>
+  <div class="wa-widget" id="waWidget">
+    <div class="wa-pop" id="waPop" role="dialog" aria-label="Asesor de BRACAR" hidden>
+      <div class="wa-pop__head">
+        <span class="wa-pop__avatar" aria-hidden="true">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Asesor de BRACAR">
+            <defs><clipPath id="waAv"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+            <g clip-path="url(#waAv)">
+              <rect width="100" height="100" fill="#d3e3f7"/>
+              <circle cx="50" cy="118" r="60" fill="#c2d8f2"/>
+              <path d="M14 100 C14 79 30 69 50 69 C70 69 86 79 86 100 Z" fill="#16345F"/>
+              <path d="M43 69 L50 83 L57 69 Z" fill="#d3e3f7"/>
+              <path d="M43 69 L50 80 L50 69 Z" fill="#20406e"/>
+              <path d="M57 69 L50 80 L50 69 Z" fill="#284f88"/>
+              <text x="50" y="95" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="8.5" fill="#ffffff" letter-spacing="0.4">BRACAR</text>
+              <rect x="44" y="57" width="12" height="15" rx="5" fill="#e3ab7f"/>
+              <circle cx="31" cy="46" r="5" fill="#f0c49b"/>
+              <circle cx="69" cy="46" r="5" fill="#f0c49b"/>
+              <circle cx="50" cy="44" r="20" fill="#f2c79f"/>
+              <path d="M29 45 C29 27 41 21 50 21 C59 21 71 27 71 45 C71 37 66 32 61 32 C57 28 43 28 39 32 C34 32 29 37 29 45 Z" fill="#2f2116"/>
+              <rect x="39.5" y="39.5" width="8" height="2.4" rx="1.2" fill="#2f2116"/>
+              <rect x="52.5" y="39.5" width="8" height="2.4" rx="1.2" fill="#2f2116"/>
+              <circle cx="43.5" cy="45.5" r="2.1" fill="#28323d"/>
+              <circle cx="56.5" cy="45.5" r="2.1" fill="#28323d"/>
+              <circle cx="39" cy="51" r="3" fill="#f4a58c" opacity=".5"/>
+              <circle cx="61" cy="51" r="3" fill="#f4a58c" opacity=".5"/>
+              <path d="M42 51.5 Q50 60 58 51.5" fill="none" stroke="#b3654a" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M30 47 Q50 19 70 47" fill="none" stroke="#0f1b2b" stroke-width="4.2" stroke-linecap="round"/>
+              <rect x="26" y="43" width="8.5" height="13" rx="4" fill="#0f1b2b"/>
+              <rect x="65.5" y="43" width="8.5" height="13" rx="4" fill="#0f1b2b"/>
+              <circle cx="30.2" cy="49.5" r="2" fill="#F5A623"/>
+              <path d="M30 56 Q33 67 47 63" fill="none" stroke="#0f1b2b" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="47.5" cy="63" r="2.8" fill="#0f1b2b"/>
+            </g>
+          </svg>
+        </span>
+        <span class="wa-pop__who">
+          <strong>Asesor BRACAR</strong>
+          <span class="wa-pop__status"><i></i> En línea</span>
+        </span>
+        <button class="wa-pop__close" id="waClose" type="button" aria-label="Cerrar chat">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18.3 5.71 12 12.01l6.3 6.29-1.41 1.41L10.59 13.42 4.3 19.71 2.89 18.3l6.3-6.29-6.3-6.3L4.3 4.3l6.29 6.3 6.3-6.3z"/></svg>
+        </button>
+      </div>
+      <div class="wa-pop__body">
+        <div class="wa-bubble">
+          <p>¡Hola! 👋 Bienvenido a <strong>Transportes Global BRACAR</strong>.</p>
+          <p>Soy tu asesor y con gusto te ayudo a cotizar tu servicio de transporte de personas. ¿Conversamos?</p>
+          <span class="wa-bubble__time">En línea · responde al instante</span>
+        </div>
+      </div>
+      <a class="wa-pop__cta"
+         href="https://wa.me/51993546564?text=Hola,%20quisiera%20solicitar%20una%20cotización%20de%20transporte"
+         target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+        Iniciar chat por WhatsApp
+      </a>
+    </div>
+
+    <button class="wa-float" id="waToggle" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="waPop" aria-label="Chatea con un asesor de BRACAR">
+      <span class="wa-float__badge" aria-hidden="true">1</span>
+      <svg class="wa-ico wa-ico--wa" viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+      <svg class="wa-ico wa-ico--x" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M18.3 5.71 12 12.01l6.3 6.29-1.41 1.41L10.59 13.42 4.3 19.71 2.89 18.3l6.3-6.29-6.3-6.3L4.3 4.3l6.29 6.3 6.3-6.3z"/></svg>
+    </button>
+  </div>
 
   <!-- ============================================================
        1. NAVBAR (fija)

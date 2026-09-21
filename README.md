@@ -165,6 +165,12 @@ WhatsApp (sin backend). Para cambiar el número, edita `WHATSAPP_NUMBER` en
 `js/script.js`. Hay una **alternativa por `mailto:`** comentada en el mismo
 archivo (variable `EMAIL_DESTINO`).
 
+El **botón flotante de WhatsApp** abre un **popup de bienvenida con un asesor
+BRACAR** (personaje SVG con polo). El texto del saludo está en el bloque
+`#waPop` de `index.html`; el enlace del botón verde y el mensaje prellenado se
+editan en el `href` de `.wa-pop__cta`. La lógica de abrir/cerrar está en la
+sección 10 de `js/script.js`.
+
 ---
 
 ## ♿ Accesibilidad y rendimiento
