@@ -28,7 +28,7 @@ bracar/
 │   └── img/
 │       ├── favicon.svg   # Favicon placeholder (reemplazar)
 │       ├── flota/        # Ilustraciones SVG genéricas de las unidades
-│       └── clientes/     # Logos de clientes (placeholders)
+│       └── clientes/     # Logos de clientes (integrados; faltan 3)
 └── README.md
 ```
 
@@ -100,17 +100,25 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   las coordenadas correctas.
 
 ### 3. Logos de clientes
-- El carrusel usa texto por defecto. Para usar logos, reemplaza cada
-  `<li class="logo">Nombre</li>` por:
-  ```html
-  <li class="logo"><img src="assets/img/clientes/grundfos.svg" alt="Grundfos Perú" /></li>
-  ```
+- Ya integrados: 17 logos en `assets/img/clientes/` (grises por defecto, a color
+  al pasar el cursor). **Faltan 3** por subir: **Imesac, Pecord Corporation y
+  CAFAE** (por ahora se muestran como texto). Para añadirlos, sube el archivo a
+  `assets/img/clientes/` y cambia el `<li class="logo logo--text">Nombre</li>`
+  por `<li class="logo"><img src="assets/img/clientes/archivo.png" alt="Nombre"></li>`.
 - **Importante:** el carrusel duplica la lista (hay un segundo `<ul>` con
   `aria-hidden="true"`) para el loop infinito. Actualiza **ambas** listas.
 
 ### 4. Testimonios
-- Sección con 3 tarjetas placeholder ("Pendiente"). Reemplaza el texto de cada
-  `<blockquote>` y los datos de `<figcaption>` cuando estén disponibles.
+- Textos de **muestra** redactados a partir de los clientes más destacados
+  (Grundfos Perú, Interbank, EsSalud). **Antes de publicarlos como oficiales,
+  valida y obtén la aprobación de cada empresa** e, idealmente, firma con el
+  nombre y cargo reales de la persona. Reemplaza la cita (`<blockquote>`) y el
+  `<figcaption>` de cada tarjeta.
+
+### 4b. Logo oficial BRACAR
+- Tu logo está en `assets/img/logo-bracar.jpg`. Aún no está incrustado en la
+  navbar/footer (siguen con la reconstrucción en texto); podemos reemplazarlo
+  cuando quieras por `<img src="assets/img/logo-bracar.jpg" alt="…">`.
 
 ### 5. Redes sociales
 - Enlaces de **Facebook** e **Instagram** con `href="#"` en la sección de
