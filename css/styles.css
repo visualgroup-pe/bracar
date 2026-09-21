@@ -281,19 +281,12 @@ section[id], header[id] { scroll-margin-top: 84px; }
    Los colores se adaptan al fondo (claros sobre el hero oscuro; de marca
    sobre la navbar clara) para mantener la legibilidad. */
 .brand { display: inline-flex; align-items: center; }
-/* Logo oficial (PNG transparente) dentro de un "chip" blanco para que sea
-   legible tanto sobre el hero oscuro como sobre la navbar clara. */
-.brand__logo {
-  display: block;
-  height: 34px; width: auto;
-  background: #fff;
-  padding: 7px 13px;
-  border-radius: 10px;
-  box-sizing: content-box;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);   /* realce sobre el hero oscuro */
-  transition: box-shadow var(--t-med);
-}
-.nav.is-scrolled .brand__logo { box-shadow: none; }   /* se integra en la navbar clara */
+/* Logo oficial SIN caja. Se muestra la versión blanca sobre el hero oscuro
+   y la versión a color cuando la navbar pasa a fondo claro (al hacer scroll). */
+.brand__logo { display: block; height: 42px; width: auto; }
+.brand__logo--light { display: none; }
+.nav.is-scrolled .brand__logo--dark { display: none; }
+.nav.is-scrolled .brand__logo--light { display: block; }
 
 /* --- Menú --- */
 .nav__menu { display: flex; align-items: center; gap: clamp(1rem, 2vw, 2rem); }
@@ -1069,7 +1062,7 @@ section[id], header[id] { scroll-margin-top: 84px; }
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .footer__brand { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
-.brand__logo--footer { height: 44px; padding: 9px 15px; box-shadow: none; }
+.brand__logo--footer { height: 50px; }
 .footer__desc { font-size: var(--fs-sm); margin-top: var(--sp-2); max-width: 40ch; }
 .footer__col h4 {
   font-family: var(--ff-head); font-weight: 700;

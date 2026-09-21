@@ -97,9 +97,10 @@
   <header class="nav" id="inicio">
     <div class="nav__inner">
       <a class="brand" href="#inicio" aria-label="Transportes Global BRACAR — Inicio">
-        <!-- LOGO OFICIAL (fondo transparente, sobre "chip" blanco para legibilidad
-             en cualquier fondo). Fuente: assets/img/logo-bracar.png -->
-        <img class="brand__logo" src="assets/img/logo-bracar.png" alt="Transportes Global BRACAR" width="446" height="109">
+        <!-- LOGO OFICIAL adaptable (sin caja): versión BLANCA sobre el hero oscuro
+             y versión a COLOR cuando la navbar se vuelve clara al hacer scroll. -->
+        <img class="brand__logo brand__logo--dark" src="assets/img/logo-bracar-white.png" alt="Transportes Global BRACAR" width="446" height="109">
+        <img class="brand__logo brand__logo--light" src="assets/img/logo-bracar.png" alt="" aria-hidden="true" width="446" height="109">
       </a>
 
       <nav class="nav__menu" id="navMenu" aria-label="Navegación principal">
@@ -768,8 +769,8 @@ l-38 -143 -190 -204 c-114 -123 -229 -236 -289 -283 l-99 -79 -361 -121 -361
   <footer class="footer">
     <div class="footer__grid">
       <div class="footer__brand">
-        <!-- LOGO OFICIAL (footer) sobre chip blanco -->
-        <img class="brand__logo brand__logo--footer" src="assets/img/logo-bracar.png" alt="Transportes Global BRACAR" width="446" height="109">
+        <!-- LOGO OFICIAL (footer) — versión blanca sobre fondo oscuro, sin caja -->
+        <img class="brand__logo brand__logo--footer" src="assets/img/logo-bracar-white.png" alt="Transportes Global BRACAR" width="446" height="109">
         <p class="footer__desc">Transportes Global BRACAR S.A.C. Transporte de personas seguro, puntual y confiable en todo el Perú.</p>
       </div>
 

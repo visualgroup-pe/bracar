@@ -116,10 +116,13 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   `<figcaption>` de cada tarjeta.
 
 ### 4b. Logo oficial BRACAR
-- **Ya incrustado** en la navbar y el footer usando `assets/img/logo-bracar.png`
-  (versión con fondo transparente, generada desde tu `logo-bracar.jpg`). Se
-  muestra sobre un "chip" blanco (`.brand__logo`) para que sea legible tanto
-  sobre el hero oscuro como sobre la navbar clara.
+- **Ya incrustado** en la navbar y el footer, **sin caja**, con dos versiones
+  transparentes generadas desde tu `logo-bracar.jpg`:
+  - `assets/img/logo-bracar.png` — a **color** (para fondos claros: navbar al
+    hacer scroll).
+  - `assets/img/logo-bracar-white.png` — **blanco** (para fondos oscuros: hero
+    y footer).
+  El intercambio color/blanco se hace por CSS (`.brand__logo--light/--dark`).
 - Los logos de clientes se procesaron a **PNG con fondo transparente** (sin
   caja), a color y a tamaño estandarizado; el único con fondo propio es Oslo
   (logo blanco sobre azul).
