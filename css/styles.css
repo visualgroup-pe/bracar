@@ -706,6 +706,31 @@ section[id], header[id] { scroll-margin-top: 84px; }
 .svc .link-cta { color: var(--on-dark); border-color: var(--amber); }
 .svc .link-cta:hover { color: var(--amber); }
 
+/* Foto de fondo fusionada con el bloque mediante un degradado */
+.svc__img {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--t-med);
+}
+.svc:hover .svc__img { transform: scale(1.05); }
+.svc::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top,
+    rgba(9, 22, 44, 0.96) 0%,
+    rgba(9, 22, 44, 0.72) 30%,
+    rgba(9, 22, 44, 0.42) 62%,
+    rgba(9, 22, 44, 0.58) 100%);
+}
+/* El bloque ancho necesita algo más de oscurecido tras el texto (a la derecha) */
+.svc--wide::after {
+  background:
+    linear-gradient(90deg, rgba(9,22,44,0.35) 0%, rgba(9,22,44,0.55) 55%, rgba(9,22,44,0.85) 100%),
+    linear-gradient(to top, rgba(9,22,44,0.9) 0%, rgba(9,22,44,0.45) 55%, rgba(9,22,44,0.5) 100%);
+}
+/* El contenido va por encima de la foto y del degradado */
+.svc__num, .svc__content { position: relative; z-index: 2; }
+.svc__title, .svc__text { text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45); }
+
 
 /* ============================================================================
    8. FLOTA
