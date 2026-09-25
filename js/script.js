@@ -194,45 +194,71 @@
 
 
   /* ------------------------------------------------------------------------
-     8. FORMULARIO DE COTIZACIÓN → WHATSAPP
-        Valida los campos obligatorios y arma un mensaje prellenado que se
-        abre en https://wa.me/51993546564 (sin backend).
+     8. FORMULARIO DE COTIZACIÓN → WHATSAPP o CORREO
+        El usuario elige el método con el selector. Se valida y se arma un
+        mensaje prellenado que se abre en WhatsApp (wa.me) o en el cliente de
+        correo (mailto), sin backend.
   ------------------------------------------------------------------------ */
-  const WHATSAPP_NUMBER = "51993546564"; // Perú (+51) 993 546 564
+  const WHATSAPP_NUMBER = "51993546564";          // Perú (+51) 993 546 564
+  const EMAIL_DESTINO = "a.mendoza@tbracar.com";  // destino de la cotización por correo
   const form = document.getElementById("quoteForm");
   const errorBox = document.getElementById("quoteError");
 
-  // Alternativa por correo (descomentar si se prefiere abrir el cliente de email):
-  // const EMAIL_DESTINO = "a.mendoza@tbracar.com";
-
   if (form) {
+    const segBtns = form.querySelectorAll(".seg__btn");
+    const submitBtn = document.getElementById("quoteSubmit");
+    const submitText = document.getElementById("quoteSubmitText");
+    const submitIco = submitBtn ? submitBtn.querySelector(".quote__submit-ico") : null;
+    const hint = document.getElementById("quoteHint");
+    const ICONS = {
+      whatsapp: '<path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>',
+      email: '<path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 2v.01L12 12l8-5.99V6H4m16 12V8.24l-8 5.99-8-5.99V18z"/>',
+    };
+
+    // Aplica el método elegido a la interfaz (etiqueta, icono, color y ayuda)
+    const setMethod = (m) => {
+      form.dataset.method = m;
+      segBtns.forEach((b) => {
+        const on = b.dataset.method === m;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-selected", String(on));
+      });
+      if (submitBtn) {
+        submitBtn.classList.toggle("btn--wa", m === "whatsapp");
+        submitBtn.classList.toggle("btn--mail", m === "email");
+      }
+      if (submitText) submitText.textContent = m === "email" ? "Cotizar por correo" : "Cotizar por WhatsApp";
+      if (submitIco) submitIco.innerHTML = ICONS[m] || ICONS.whatsapp;
+      if (hint) hint.textContent = m === "email"
+        ? "Se abrirá tu correo con la solicitud lista para enviar a " + EMAIL_DESTINO + "."
+        : "Se abrirá WhatsApp con tu solicitud lista para enviar.";
+    };
+    segBtns.forEach((b) => b.addEventListener("click", () => setMethod(b.dataset.method)));
+
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      const method = form.dataset.method || "whatsapp";
 
-      // Limpia estados de error previos
       form.querySelectorAll(".field--invalid").forEach((f) => f.classList.remove("field--invalid"));
       if (errorBox) { errorBox.hidden = true; errorBox.textContent = ""; }
 
       const data = new FormData(form);
       const get = (k) => (data.get(k) || "").toString().trim();
+      const name = get("name"), phone = get("phone"), email = get("email"), service = get("service");
+      const pax = get("pax"), date = get("date"), origin = get("origin"), dest = get("dest"), message = get("message");
 
-      const name = get("name");
-      const phone = get("phone");
-      const email = get("email");
-      const service = get("service");
-      const pax = get("pax");
-      const date = get("date");
-      const origin = get("origin");
-      const dest = get("dest");
-      const message = get("message");
-
-      // --- Validación ---
+      // --- Validación (según el método elegido) ---
       const invalid = [];
-      if (!name)    invalid.push("name");
-      if (!phone)   invalid.push("phone");
+      if (!name) invalid.push("name");
       if (!service) invalid.push("service");
-      // Si se ingresó correo, validar formato básico
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) invalid.push("email");
+      if (method === "email") {
+        if (!email || !emailRe.test(email)) invalid.push("email");
+      } else {
+        if (!phone) invalid.push("phone");
+        if (email && !emailRe.test(email)) invalid.push("email");
+      }
 
       if (invalid.length) {
         invalid.forEach((n) => {
@@ -240,41 +266,35 @@
           if (input) input.closest(".field").classList.add("field--invalid");
         });
         if (errorBox) {
-          errorBox.textContent = "Por favor completa los campos obligatorios (Nombres, Número y Tipo de servicio) y revisa el correo.";
+          errorBox.textContent = method === "email"
+            ? "Completa los campos obligatorios: Nombres, Correo y Tipo de servicio."
+            : "Completa los campos obligatorios: Nombres, Número y Tipo de servicio.";
           errorBox.hidden = false;
         }
-        // Enfoca el primer campo con error
         const first = form.querySelector(`[name="${invalid[0]}"]`);
         if (first) first.focus();
         return;
       }
 
-      // --- Armado del mensaje de WhatsApp ---
-      const lines = [
-        "*Solicitud de cotización — BRACAR*",
-        "",
-        `👤 *Nombres:* ${name}`,
-        `📞 *Número:* ${phone}`,
-      ];
-      if (email)  lines.push(`✉️ *Correo:* ${email}`);
-      lines.push(`🚌 *Servicio:* ${service}`);
-      if (pax)    lines.push(`👥 *Pasajeros:* ${pax}`);
-      if (date)   lines.push(`📅 *Fecha:* ${date}`);
-      if (origin) lines.push(`📍 *Origen:* ${origin}`);
-      if (dest)   lines.push(`🏁 *Destino:* ${dest}`);
-      if (message) { lines.push("", `📝 *Mensaje:* ${message}`); }
+      // --- Datos de la solicitud ---
+      const rows = [
+        ["Nombres", name], ["Número", phone], ["Correo", email], ["Servicio", service],
+        ["Pasajeros", pax], ["Fecha", date], ["Origen", origin], ["Destino", dest], ["Mensaje", message],
+      ].filter((r) => r[1]);
 
-      const text = encodeURIComponent(lines.join("\n"));
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
-
-      // Abre WhatsApp en una pestaña nueva
-      window.open(url, "_blank", "noopener");
-
-      /* --- ALTERNATIVA POR CORREO (mailto) — descomentar para usarla ---
-      const subject = encodeURIComponent("Solicitud de cotización — " + name);
-      const body = encodeURIComponent(lines.join("\n"));
-      window.location.href = `mailto:${EMAIL_DESTINO}?subject=${subject}&body=${body}`;
-      */
+      if (method === "email") {
+        // --- Correo (mailto) ---
+        const subject = "Solicitud de cotización — " + name;
+        const body = "Solicitud de cotización — Transportes BRACAR\n\n" +
+          rows.map((r) => r[0] + ": " + r[1]).join("\n");
+        window.location.href = `mailto:${EMAIL_DESTINO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      } else {
+        // --- WhatsApp ---
+        const ico = { "Nombres": "👤", "Número": "📞", "Correo": "✉️", "Servicio": "🚌", "Pasajeros": "👥", "Fecha": "📅", "Origen": "📍", "Destino": "🏁", "Mensaje": "📝" };
+        const lines = ["*Solicitud de cotización — BRACAR*", ""]
+          .concat(rows.map((r) => `${ico[r[0]] || "•"} *${r[0]}:* ${r[1]}`));
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+      }
     });
   }
 

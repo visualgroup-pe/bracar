@@ -127,9 +127,24 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   caja), a color y a tamaño estandarizado; el único con fondo propio es Oslo
   (logo blanco sobre azul).
 
-### 5. Redes sociales
-- Enlaces de **Facebook** e **Instagram** con `href="#"` en la sección de
-  contacto y en el footer. Sustituye por las URLs reales.
+### 5. Redes sociales  ⚠️ ENLACES PENDIENTES
+- Botones en el **menú (navbar)** — Facebook, Instagram y TikTok — con
+  `href="#"` (bloque `.nav__social` en `index.html`).
+- También en la sección de **contacto** y el **footer** (Facebook e Instagram).
+- Sustituye todos los `href="#"` por las URLs reales cuando las tengas.
+
+### 5b. Certificaciones — logos MTC / ATU
+- **ATU:** logo oficial incluido en `assets/img/certificaciones/atu.svg`.
+- **MTC:** ⚠️ **pendiente el logo oficial**. Por ahora hay un recuadro con el
+  texto "MTC". Sube el archivo a `assets/img/certificaciones/mtc.png` y en la
+  sección `.certs` reemplaza el `<span class="cert-logo__ph">` por
+  `<img src="assets/img/certificaciones/mtc.png" alt="MTC">`.
+
+### 5c. Formulario de cotización — WhatsApp o Correo
+- El formulario tiene un **selector** (WhatsApp / Correo). Según la opción, el
+  botón envía por **WhatsApp** (`wa.me`) o por **correo** (`mailto:` a
+  `a.mendoza@tbracar.com`). Se configura en la sección 8 de `js/script.js`
+  (`WHATSAPP_NUMBER` y `EMAIL_DESTINO`).
 
 ### 6. Imagen para redes (Open Graph) y favicon
 - `og:image` apunta a `assets/img/og-cover.jpg` (1200×630 px recomendado).
