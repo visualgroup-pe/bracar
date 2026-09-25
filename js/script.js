@@ -389,4 +389,52 @@
     });
   }
 
+
+  /* ------------------------------------------------------------------------
+     11. CARRUSEL AUTOMÁTICO DE FOTOS (sección Flota)
+        Cada tarjeta con [data-carousel] rota sus fotos con crossfade.
+        Genera puntos indicadores, pausa al pasar el mouse y respeta
+        prefers-reduced-motion (no rota, muestra la primera foto).
+  ------------------------------------------------------------------------ */
+  const carousels = document.querySelectorAll("[data-carousel]");
+  carousels.forEach((car, ci) => {
+    const slides = Array.prototype.slice.call(car.querySelectorAll(".carousel__slide"));
+    if (slides.length < 2) return;
+
+    // Puntos indicadores
+    const dotsWrap = document.createElement("div");
+    dotsWrap.className = "carousel__dots";
+    slides.forEach((s, i) => {
+      const d = document.createElement("button");
+      d.type = "button";
+      d.className = "carousel__dot" + (i === 0 ? " is-active" : "");
+      d.setAttribute("aria-label", "Ver foto " + (i + 1));
+      d.addEventListener("click", () => go(i, true));
+      dotsWrap.appendChild(d);
+    });
+    car.appendChild(dotsWrap);
+    const dots = Array.prototype.slice.call(dotsWrap.children);
+
+    let idx = 0, timer = null;
+    const INTERVAL = 4000;
+    const go = (n, manual) => {
+      slides[idx].classList.remove("is-active");
+      dots[idx].classList.remove("is-active");
+      idx = (n + slides.length) % slides.length;
+      slides[idx].classList.add("is-active");
+      dots[idx].classList.add("is-active");
+      if (manual) restart();
+    };
+    const next = () => go(idx + 1);
+    const start = () => { if (!prefersReduced && !timer) timer = setInterval(next, INTERVAL); };
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const restart = () => { stop(); start(); };
+
+    car.addEventListener("mouseenter", stop);   // pausa al pasar el mouse
+    car.addEventListener("mouseleave", start);
+
+    // Desfase inicial: evita que todas cambien a la vez
+    if (!prefersReduced) setTimeout(start, ci * 900);
+  });
+
 })();

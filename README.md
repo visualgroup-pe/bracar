@@ -27,7 +27,7 @@ bracar/
 ├── assets/
 │   └── img/
 │       ├── favicon.svg   # Favicon placeholder (reemplazar)
-│       ├── flota/        # Ilustraciones SVG genéricas de las unidades
+│       ├── flota/        # Fotos reales de las unidades (con logo)
 │       └── clientes/     # Logos de clientes (integrados; faltan 3)
 └── README.md
 ```
@@ -85,13 +85,17 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   - **Silueta del Perú:** es un `<g class="perumap__land">` (silueta de mapsicon,
     licencia MIT); su color sale del degradado `#mapLand` del propio SVG.
 
-### 2. Fotos de la flota
-- Por ahora cada unidad usa una **ilustración genérica en SVG** (colores de la
-  marca) ubicada en `assets/img/flota/`: `auto.svg`, `minivan.svg`, `van.svg`,
-  `coaster.svg`, `minibus.svg`, `bus.svg`.
-- Para usar **fotos reales**, reemplaza el `src` de cada `<img>` en la sección
-  Flota de `index.html` (por ejemplo `assets/img/flota/bus.jpg`) y sube la foto.
-- Tamaño sugerido: **480×320 px** (relación 3:2).
+### 2. Fotos de la flota (carrusel automático)
+- Cada unidad usa **fotos reales** en `assets/img/flota/` con nombres
+  `‹tipo›-N.jpg` (`auto-1`, `minivan-1..3`, `van-1..4`, `coaster-1..3`,
+  `minibus-1..3`, `bus-1..5`). Ya llevan el **logo BRACAR** insertado (marca de
+  agua abajo a la derecha) y están optimizadas para web.
+- Cada tarjeta es un **carrusel automático** (crossfade cada 4 s, con puntos
+  indicadores, pausa al pasar el mouse y respeto de `prefers-reduced-motion`).
+- **Para agregar/cambiar fotos:** sube el `.jpg` a `assets/img/flota/` y añade
+  un `<img class="carousel__slide" src="…">` dentro del `.carousel` de esa
+  tarjeta en `index.html`. El carrusel y los puntos se generan solos (JS
+  sección 11). La marca de agua se puede reaplicar con el mismo criterio.
 
 ### 2b. Ubicación (Google Maps)
 - La sección "Ubicación" incrusta Google Maps en modo *embed* (sin API key).
