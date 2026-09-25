@@ -139,10 +139,7 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
 
 ### 5b. Certificaciones — logos MTC / ATU
 - **ATU:** logo oficial incluido en `assets/img/certificaciones/atu.svg`.
-- **MTC:** ⚠️ **pendiente el logo oficial**. Por ahora hay un recuadro con el
-  texto "MTC". Sube el archivo a `assets/img/certificaciones/mtc.png` y en la
-  sección `.certs` reemplaza el `<span class="cert-logo__ph">` por
-  `<img src="assets/img/certificaciones/mtc.png" alt="MTC">`.
+- **MTC:** logo oficial incluido en `assets/img/certificaciones/mtc.png`.
 
 ### 5c. Formulario de cotización — WhatsApp o Correo
 - El formulario tiene un **selector** (WhatsApp / Correo). Según la opción, el
