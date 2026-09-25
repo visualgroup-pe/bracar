@@ -88,14 +88,21 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
 ### 2. Fotos de la flota (carrusel automático)
 - Cada unidad usa **fotos reales** en `assets/img/flota/` con nombres
   `‹tipo›-N.jpg` (`auto-1`, `minivan-1..3`, `van-1..4`, `coaster-1..3`,
-  `minibus-1..3`, `bus-1..5`). Ya llevan el **logo BRACAR** insertado (marca de
-  agua abajo a la derecha) y están optimizadas para web.
+  `minibus-1..3`, `bus-1..5`). Llevan el **logo BRACAR estampado** sobre un
+  **panel 100 % blanco** de cada unidad (efecto de rótulo impreso en la
+  carrocería, no una marca de agua en la esquina) y están optimizadas para web.
+  Los `bus-*` conservan su propia rotulación y `van-1` se dejó sin estampar.
+  El script de estampado está en el scratchpad (`restamp.py`): el diccionario
+  `P` guarda las coordenadas `(cx, cy, ancho)` en fracciones por foto.
+  **Nota:** la foto de origen `minivan-3.jpg` trae una marca de agua
+  "dreamstime" del banco de imágenes; conviene reemplazar ese archivo fuente.
 - Cada tarjeta es un **carrusel automático** (crossfade cada 4 s, con puntos
   indicadores, pausa al pasar el mouse y respeto de `prefers-reduced-motion`).
 - **Para agregar/cambiar fotos:** sube el `.jpg` a `assets/img/flota/` y añade
   un `<img class="carousel__slide" src="…">` dentro del `.carousel` de esa
   tarjeta en `index.html`. El carrusel y los puntos se generan solos (JS
-  sección 11). La marca de agua se puede reaplicar con el mismo criterio.
+  sección 11). El logo se puede reestampar con el mismo criterio (siempre
+  sobre una zona blanca y plana de la carrocería).
 
 ### 2b. Ubicación (Google Maps)
 - La sección "Ubicación" incrusta Google Maps en modo *embed* (sin API key).
