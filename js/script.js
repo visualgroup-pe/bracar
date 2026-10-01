@@ -206,7 +206,7 @@
   // cálculo. PEGA AQUÍ la URL que te da Google al "Implementar → Aplicación web"
   // (ver README, sección "Guardar las cotizaciones en Google Sheets").
   // Mientras esté vacía, el guardado en la hoja simplemente se omite.
-  const SHEETS_ENDPOINT = "";
+  const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwtSIEmXS6Jvk8jQ4ua2WGjQPDYyZQP3YkDSQcvNNWO07qJVWiYfPe3Y__pXPgtw0NHZQ/exec";
 
   // Envía la cotización a la hoja de cálculo (no bloquea el envío por
   // WhatsApp/correo). Usa text/plain para evitar el preflight CORS de Apps Script.
