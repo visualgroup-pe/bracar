@@ -154,6 +154,32 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
   `a.mendoza@tbracar.com`). Se configura en la sección 8 de `js/script.js`
   (`WHATSAPP_NUMBER` y `EMAIL_DESTINO`).
 
+### 5d. Guardar las cotizaciones en Google Sheets  ⚠️ FALTA PEGAR LA URL
+Cada envío válido del formulario también se guarda como una fila en una Google
+Sheet. Como el sitio es estático (GitHub Pages, sin servidor), se usa un
+**Google Apps Script** publicado como *Aplicación web*. Configúralo una vez:
+
+1. Crea una **Google Sheet** nueva (ahí se guardarán las cotizaciones).
+2. En esa hoja: menú **Extensiones → Apps Script**.
+3. Borra el contenido y pega **todo** `apps-script/Codigo.gs` (está en este repo).
+   Guarda (💾).
+4. **Implementar → Nueva implementación**, tipo **Aplicación web**:
+   - *Ejecutar como:* **Yo** (tu cuenta).
+   - *Quién tiene acceso:* **Cualquier usuario**.
+   La primera vez Google pedirá autorizar permisos: acéptalos.
+5. Copia la **URL** que termina en `/exec`.
+6. Pégala en `js/script.js`, en la constante **`SHEETS_ENDPOINT`** (sección 8).
+   Haz commit/push y listo: las nuevas cotizaciones aparecerán en la hoja.
+
+Notas:
+- Mientras `SHEETS_ENDPOINT` esté vacío, el guardado se omite y el formulario
+  sigue funcionando normal (WhatsApp/correo).
+- El guardado es en segundo plano y **no bloquea** el envío por WhatsApp/correo;
+  si la hoja fallara, el usuario igual envía su solicitud.
+- Se guardan: fecha/hora, método, nombres, número, correo, servicio, pasajeros,
+  fecha del servicio, origen, destino y mensaje.
+- Para cambiar de hoja, repite la publicación en la hoja nueva y actualiza la URL.
+
 ### 6. Imagen para redes (Open Graph) y favicon
 - `og:image` apunta a `assets/img/og-cover.jpg` (1200×630 px recomendado).
 - `favicon.svg` es un placeholder; reemplázalo por el ícono definitivo.

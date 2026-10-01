@@ -201,6 +201,28 @@
   ------------------------------------------------------------------------ */
   const WHATSAPP_NUMBER = "51993546564";          // Perú (+51) 993 546 564
   const EMAIL_DESTINO = "a.mendoza@tbracar.com";  // destino de la cotización por correo
+
+  // URL del Web App de Google Apps Script que guarda cada envío en la hoja de
+  // cálculo. PEGA AQUÍ la URL que te da Google al "Implementar → Aplicación web"
+  // (ver README, sección "Guardar las cotizaciones en Google Sheets").
+  // Mientras esté vacía, el guardado en la hoja simplemente se omite.
+  const SHEETS_ENDPOINT = "";
+
+  // Envía la cotización a la hoja de cálculo (no bloquea el envío por
+  // WhatsApp/correo). Usa text/plain para evitar el preflight CORS de Apps Script.
+  function saveToSheet(payload) {
+    if (!SHEETS_ENDPOINT) return;
+    try {
+      fetch(SHEETS_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(() => {});
+    } catch (_) { /* nunca interrumpe el envío del usuario */ }
+  }
+
   const form = document.getElementById("quoteForm");
   const errorBox = document.getElementById("quoteError");
 
@@ -281,6 +303,14 @@
         ["Nombres", name], ["Número", phone], ["Correo", email], ["Servicio", service],
         ["Pasajeros", pax], ["Fecha", date], ["Origen", origin], ["Destino", dest], ["Mensaje", message],
       ].filter((r) => r[1]);
+
+      // --- Guarda la solicitud en Google Sheets (en segundo plano) ---
+      saveToSheet({
+        fecha: new Date().toISOString(),
+        metodo: method,
+        nombres: name, numero: phone, correo: email, servicio: service,
+        pasajeros: pax, fecha_servicio: date, origen: origin, destino: dest, mensaje: message,
+      });
 
       if (method === "email") {
         // --- Correo (mailto) ---
