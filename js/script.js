@@ -73,6 +73,21 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
   }
 
+  /* ------------------------------------------------------------------------
+     3b. LOGO / "INICIO" → VOLVER AL PRINCIPIO
+        El ancla #inicio está en el header fijo (siempre visible), así que un
+        enlace normal no desplaza. Forzamos el scroll al tope de la página.
+  ------------------------------------------------------------------------ */
+  document.querySelectorAll('a[href="#inicio"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeMenu();
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, left: 0, behavior: reduce ? "auto" : "smooth" });
+      if (history.replaceState) history.replaceState(null, "", location.pathname + location.search);
+    });
+  });
+
 
   /* ------------------------------------------------------------------------
      4. CONTADORES ANIMADOS
