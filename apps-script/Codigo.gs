@@ -97,12 +97,19 @@ function doGet() {
 }
 
 /**
- * EJECUTA ESTA FUNCIÓN UNA VEZ (botón ▶ "Ejecutar") para AUTORIZAR el permiso
- * de enviar correo. No envía ningún email; solo abre la pantalla de permisos.
- * Acepta todos los permisos (incluye "Enviar correo como tú"). Tras autorizar,
- * el formulario ya podrá enviar correos sin volver a desplegar.
+ * EJECUTA ESTA FUNCIÓN UNA VEZ (botón ▶ "Ejecutar").
+ * 1) Abre la pantalla de permisos: acéptala TODA (incluye "Enviar correo
+ *    electrónico como tú"). En "Google no verificó esta app":
+ *    Configuración avanzada → Ir a (tu proyecto) → Permitir.
+ * 2) Envía UN correo de prueba a DESTINO_CORREO para confirmar que ya funciona.
+ * Tras autorizar, el formulario de la web enviará correos sin volver a desplegar.
  */
 function autorizar() {
-  var quota = MailApp.getRemainingDailyQuota(); // fuerza el permiso de correo
-  Logger.log('Autorización OK. Cuota de correos restante hoy: ' + quota);
+  MailApp.sendEmail(
+    DESTINO_CORREO,
+    'BRACAR — prueba de autorización de correo',
+    'Si recibes este correo, el envío de cotizaciones desde la web ya está ' +
+    'autorizado y funcionando. Puedes borrar este mensaje.'
+  );
+  Logger.log('Correo de prueba enviado a ' + DESTINO_CORREO);
 }
