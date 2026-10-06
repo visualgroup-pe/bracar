@@ -221,7 +221,7 @@
   // cálculo. PEGA AQUÍ la URL que te da Google al "Implementar → Aplicación web"
   // (ver README, sección "Guardar las cotizaciones en Google Sheets").
   // Mientras esté vacía, el guardado en la hoja simplemente se omite.
-  const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwtSIEmXS6Jvk8jQ4ua2WGjQPDYyZQP3YkDSQcvNNWO07qJVWiYfPe3Y__pXPgtw0NHZQ/exec";
+  const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyFAjsUeBU0rOCiybxDCsJUFQ6OH8FADK_xmGN0PPiA7NdDnS9OOYP-5Xs_IYLIdwTSeQ/exec";
 
   // Envía la cotización al Web App de Apps Script (guarda la fila en la hoja y,
   // si el método es "correo", también envía el email). Devuelve una promesa que

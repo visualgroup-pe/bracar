@@ -95,3 +95,14 @@ function doGet() {
     .createTextOutput('BRACAR: endpoint activo. Usa POST para guardar cotizaciones.')
     .setMimeType(ContentService.MimeType.TEXT);
 }
+
+/**
+ * EJECUTA ESTA FUNCIÓN UNA VEZ (botón ▶ "Ejecutar") para AUTORIZAR el permiso
+ * de enviar correo. No envía ningún email; solo abre la pantalla de permisos.
+ * Acepta todos los permisos (incluye "Enviar correo como tú"). Tras autorizar,
+ * el formulario ya podrá enviar correos sin volver a desplegar.
+ */
+function autorizar() {
+  var quota = MailApp.getRemainingDailyQuota(); // fuerza el permiso de correo
+  Logger.log('Autorización OK. Cuota de correos restante hoy: ' + quota);
+}
