@@ -223,23 +223,28 @@
   // Mientras esté vacía, el guardado en la hoja simplemente se omite.
   const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwtSIEmXS6Jvk8jQ4ua2WGjQPDYyZQP3YkDSQcvNNWO07qJVWiYfPe3Y__pXPgtw0NHZQ/exec";
 
-  // Envía la cotización a la hoja de cálculo (no bloquea el envío por
-  // WhatsApp/correo). Usa text/plain para evitar el preflight CORS de Apps Script.
+  // Envía la cotización al Web App de Apps Script (guarda la fila en la hoja y,
+  // si el método es "correo", también envía el email). Devuelve una promesa que
+  // se resuelve cuando la petición se completa (modo no-cors: respuesta opaca,
+  // pero resuelve al terminar). Usa text/plain para evitar el preflight CORS.
+  function postQuote(payload) {
+    if (!SHEETS_ENDPOINT) return Promise.reject(new Error("sin-endpoint"));
+    return fetch(SHEETS_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    });
+  }
+  // Guarda en segundo plano sin bloquear (para el flujo de WhatsApp).
   function saveToSheet(payload) {
-    if (!SHEETS_ENDPOINT) return;
-    try {
-      fetch(SHEETS_ENDPOINT, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload),
-        keepalive: true,
-      }).catch(() => {});
-    } catch (_) { /* nunca interrumpe el envío del usuario */ }
+    try { postQuote(payload).catch(() => {}); } catch (_) {}
   }
 
   const form = document.getElementById("quoteForm");
   const errorBox = document.getElementById("quoteError");
+  const okBox = document.getElementById("quoteOk");
 
   if (form) {
     const segBtns = form.querySelectorAll(".seg__btn");
@@ -267,7 +272,7 @@
       if (submitText) submitText.textContent = m === "email" ? "Cotizar por correo" : "Cotizar por WhatsApp";
       if (submitIco) submitIco.innerHTML = ICONS[m] || ICONS.whatsapp;
       if (hint) hint.textContent = m === "email"
-        ? "Se abrirá tu correo con la solicitud lista para enviar a " + EMAIL_DESTINO + "."
+        ? "Enviaremos tu solicitud por correo desde la web y verás una confirmación aquí mismo."
         : "Se abrirá WhatsApp con tu solicitud lista para enviar.";
     };
     segBtns.forEach((b) => b.addEventListener("click", () => setMethod(b.dataset.method)));
@@ -280,6 +285,7 @@
 
       form.querySelectorAll(".field--invalid").forEach((f) => f.classList.remove("field--invalid"));
       if (errorBox) { errorBox.hidden = true; errorBox.textContent = ""; }
+      if (okBox) { okBox.hidden = true; okBox.textContent = ""; }
 
       const data = new FormData(form);
       const get = (k) => (data.get(k) || "").toString().trim();
@@ -318,23 +324,53 @@
         ["Nombres", name], ["Número", phone], ["Correo", email], ["Servicio", service],
         ["Pasajeros", pax], ["Fecha", date], ["Origen", origin], ["Destino", dest], ["Mensaje", message],
       ].filter((r) => r[1]);
-
-      // --- Guarda la solicitud en Google Sheets (en segundo plano) ---
-      saveToSheet({
+      const payload = {
         fecha: new Date().toISOString(),
         metodo: method,
         nombres: name, numero: phone, correo: email, servicio: service,
         pasajeros: pax, fecha_servicio: date, origen: origin, destino: dest, mensaje: message,
-      });
+      };
 
       if (method === "email") {
-        // --- Correo (mailto) ---
-        const subject = "Solicitud de cotización — " + name;
-        const body = "Solicitud de cotización — Transportes BRACAR\n\n" +
-          rows.map((r) => r[0] + ": " + r[1]).join("\n");
-        window.location.href = `mailto:${EMAIL_DESTINO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // --- Correo enviado DESDE LA WEB (sin abrir la app de correo) ---
+        // El Web App de Apps Script guarda la fila y envía el correo. Mostramos
+        // confirmación en pantalla. Si no hay endpoint o falla, usamos mailto.
+        const mailtoFallback = () => {
+          const subject = "Solicitud de cotización — " + name;
+          const body = "Solicitud de cotización — Transportes BRACAR\n\n" +
+            rows.map((r) => r[0] + ": " + r[1]).join("\n");
+          window.location.href = `mailto:${EMAIL_DESTINO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        };
+        if (!SHEETS_ENDPOINT) { mailtoFallback(); return; }
+
+        const prevText = submitText ? submitText.textContent : "";
+        if (submitBtn) submitBtn.disabled = true;
+        if (submitText) submitText.textContent = "Enviando…";
+
+        postQuote(payload)
+          .then(() => {
+            form.reset();
+            setMethod("email");
+            if (okBox) {
+              okBox.textContent = "✅ ¡Solicitud enviada! Recibimos tu cotización y te responderemos muy pronto. Gracias por escribir a Transportes BRACAR.";
+              okBox.hidden = false;
+              okBox.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          })
+          .catch(() => {
+            if (errorBox) {
+              errorBox.textContent = "No pudimos enviar automáticamente. Abriremos tu correo para completar el envío…";
+              errorBox.hidden = false;
+            }
+            setTimeout(mailtoFallback, 900);
+          })
+          .finally(() => {
+            if (submitBtn) submitBtn.disabled = false;
+            if (submitText) submitText.textContent = prevText || "Cotizar por correo";
+          });
       } else {
-        // --- WhatsApp ---
+        // --- WhatsApp (guarda en segundo plano y abre el chat) ---
+        saveToSheet(payload);
         const ico = { "Nombres": "👤", "Número": "📞", "Correo": "✉️", "Servicio": "🚌", "Pasajeros": "👥", "Fecha": "📅", "Origen": "📍", "Destino": "🏁", "Mensaje": "📝" };
         const lines = ["*Solicitud de cotización — BRACAR*", ""]
           .concat(rows.map((r) => `${ico[r[0]] || "•"} *${r[0]}:* ${r[1]}`));

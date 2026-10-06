@@ -149,10 +149,17 @@ Busca los comentarios `PLACEHOLDER` dentro de los archivos. Puntos clave:
 - **MTC:** logo oficial incluido en `assets/img/certificaciones/mtc.png`.
 
 ### 5c. Formulario de cotización — WhatsApp o Correo
-- El formulario tiene un **selector** (WhatsApp / Correo). Según la opción, el
-  botón envía por **WhatsApp** (`wa.me`) o por **correo** (`mailto:` a
-  `a.mendoza@tbracar.com`). Se configura en la sección 8 de `js/script.js`
-  (`WHATSAPP_NUMBER` y `EMAIL_DESTINO`).
+- El formulario tiene un **selector** (WhatsApp / Correo):
+  - **WhatsApp:** abre `wa.me` con el mensaje prellenado (y guarda la fila en
+    la hoja en segundo plano).
+  - **Correo:** se **envía desde la web** (NO abre la app de correo del
+    visitante) a través del mismo Web App de Apps Script, que guarda la fila y
+    manda el email a `a.mendoza@tbracar.com`; luego el sitio muestra una
+    **confirmación en pantalla**. Si el Web App no estuviera configurado o
+    fallara, usa `mailto:` como respaldo automático.
+- Se configura en la sección 8 de `js/script.js` (`WHATSAPP_NUMBER`,
+  `EMAIL_DESTINO` y `SHEETS_ENDPOINT`). El destino del correo también está en
+  `apps-script/Codigo.gs` (`DESTINO_CORREO`).
 
 ### 5d. Guardar las cotizaciones en Google Sheets  ⚠️ FALTA PEGAR LA URL
 Cada envío válido del formulario también se guarda como una fila en una Google
@@ -171,9 +178,16 @@ Sheet. Como el sitio es estático (GitHub Pages, sin servidor), se usa un
 6. Pégala en `js/script.js`, en la constante **`SHEETS_ENDPOINT`** (sección 8).
    Haz commit/push y listo: las nuevas cotizaciones aparecerán en la hoja.
 
+> ⚠️ **Al actualizar `Codigo.gs` (p. ej. para que envíe el correo):** no basta
+> con guardar. Google sirve la versión **publicada**, así que hay que
+> **re-desplegar**: *Implementar → Gestionar implementaciones → ✏️ (editar) →
+> Versión: **Nueva versión** → Implementar*. La URL `/exec` **no cambia**. La
+> primera vez que uses `MailApp` pedirá **autorizar el permiso de enviar
+> correo**: acéptalo.
+
 Notas:
 - Mientras `SHEETS_ENDPOINT` esté vacío, el guardado se omite y el formulario
-  sigue funcionando normal (WhatsApp/correo).
+  sigue funcionando normal (WhatsApp y correo por `mailto:` de respaldo).
 - El guardado es en segundo plano y **no bloquea** el envío por WhatsApp/correo;
   si la hoja fallara, el usuario igual envía su solicitud.
 - Se guardan: fecha/hora, método, nombres, número, correo, servicio, pasajeros,

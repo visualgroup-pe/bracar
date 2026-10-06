@@ -1088,6 +1088,14 @@ section[id], header[id] { scroll-margin-top: 84px; }
   border-radius: var(--r-sm);
   padding: 0.7em 1em;
 }
+.quote__ok {
+  grid-column: 1 / -1;
+  color: #1a7f46; font-size: var(--fs-sm); font-weight: 600;
+  background: rgba(38,166,91,0.10);
+  border: 1px solid rgba(38,166,91,0.30);
+  border-radius: var(--r-sm);
+  padding: 0.85em 1em;
+}
 .quote > button { grid-column: 1 / -1; }
 .quote__hint { grid-column: 1 / -1; font-size: var(--fs-xs); color: var(--muted); text-align: center; }
 
