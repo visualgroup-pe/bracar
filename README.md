@@ -195,8 +195,38 @@ Notas:
 - Para cambiar de hoja, repite la publicación en la hoja nueva y actualiza la URL.
 
 ### 6. Imagen para redes (Open Graph) y favicon
-- `og:image` apunta a `assets/img/og-cover.jpg` (1200×630 px recomendado).
+- `og:image` → `assets/img/og-cover.jpg` (1200×630, generada desde una foto de
+  la flota; puedes reemplazarla por un diseño propio del mismo tamaño).
 - `favicon.svg` es un placeholder; reemplázalo por el ícono definitivo.
+
+### 5e. SEO / aparecer en Google — pasos para posicionar
+El sitio ya está **optimizado on-page** para el dominio
+`https://www.transportesbracar.com/`:
+- `title`, `meta description` y `keywords` con la marca y los servicios.
+- `canonical`, Open Graph y Twitter Card con el **dominio correcto**.
+- `robots` (index, follow), **`robots.txt`** y **`sitemap.xml`** en la raíz.
+- **Datos estructurados** `LocalBusiness` (nombre, teléfonos, dirección, RUC,
+  horario 24 h, logo, redes `sameAs`).
+
+**Para que Google lo indexe y suba de posición, falta la parte en Google
+(una vez):**
+1. Entra a **Google Search Console** (search.google.com/search-console) y
+   **agrega la propiedad** `transportesbracar.com` (tipo *Dominio*, se verifica
+   por DNS) o `https://www.transportesbracar.com/` (prefijo de URL).
+2. **Verifica** la propiedad (DNS TXT, o pega el código en el `<meta
+   name="google-site-verification">` que está comentado en `index.html`).
+3. En Search Console → **Sitemaps**, envía `sitemap.xml`.
+4. Usa **Inspección de URL** → *Solicitar indexación* para la home.
+5. (Muy recomendado) Crea/forma el **Perfil de Empresa en Google** (Google
+   Business Profile) con el nombre, dirección, teléfonos, horario, fotos y el
+   enlace a la web: es lo que más ayuda a salir **#1 en búsquedas locales** y
+   en Google Maps.
+
+**Expectativa realista:** para búsquedas de tu **marca** ("transportes bracar")
+el sitio debería salir **primero** en pocos días tras indexarse. Para términos
+genéricos y competidos ("transporte de personal Lima") el puesto depende de la
+competencia, enlaces entrantes y contenido; se mejora con el tiempo (reseñas,
+publicaciones, backlinks). Nadie puede *garantizar* el #1 absoluto.
 
 ### 7. Google Analytics (opcional)
 - Pega tu etiqueta antes de `</head>` en `index.html`:
